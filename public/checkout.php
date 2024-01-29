@@ -1,7 +1,8 @@
 <?php 
-include '../includes/config.php'; 
 
 session_start();
+
+include '../includes/config.php'; 
 
 if(!empty($_SESSION['cart']) && isset($_POST['checkout'])){
 
@@ -44,10 +45,10 @@ if(!empty($_SESSION['cart']) && isset($_POST['checkout'])){
         </div>
         
 
-    <form class="col-7 mx-auto mb-4 d-flex flex-wrap justify-content-between gap-3">
+    <form class="col-7 mx-auto mb-4 d-flex flex-wrap justify-content-between gap-3" method="post" action="place-order.php">
         <div class="form-group col-5 d-flex flex-column gap-2">
          <label for="name">Name</label>
-         <input class ="form-control" type="text" name="name" placeholder="Enter your name...">
+         <input class ="form-control" type="text" name="name" placeholder="Enter your name..." required>
         </div>
         <div class="form-group col-5 d-flex flex-column gap-2">
          <label for="phone">Phone</label>
@@ -55,7 +56,7 @@ if(!empty($_SESSION['cart']) && isset($_POST['checkout'])){
         </div>
         <div class="form-group col-12 d-flex flex-column gap-2">
          <label for="email">Email</label>
-         <input class ="form-control" type="email" name="email" placeholder="Enter your email...">
+         <input class ="form-control" type="email" name="email" placeholder="Enter your email..." required>
         </div>
         <div class="form-group col-5 d-flex flex-column gap-2">
          <label for="address">Shipping Address</label>
