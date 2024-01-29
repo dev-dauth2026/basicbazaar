@@ -1,11 +1,15 @@
+<?php 
 
- <!-- Include Navbar -->
- <?php 
+session_start();
 
- session_start();
- include '../includes/config.php';
- 
- ?>
+include '../includes/config.php'; 
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,23 +35,30 @@
 
     
       <!-- Include product card -->
-      <?php include '../includes/product_card.php'; ?>
+<div class="container py-5">
+    <div class="row col-6 mx-auto my-5 p-5 shadow rounded">
+        <div class="  mx-auto d-flex flex-column mb-4">
+        <h3 class="text-center">My Account </h3>
+        <div class=" col-4 mx-auto custom-hr"></div>
+        <hr class="text-warning">
+        </div>
+        <div class="">
+            <p>Welcome, <strong><?php echo $_SESSION['user_name'] ?></strong>. You have been signuped successfully </p>
+        </div>
+        
 
-      <!-- include pagination -->
+    </div>
 
-      <?php include '../includes/product_pagination.php'; ?>
+</div>    
 
-     
 
     <!-- Include Navbar -->
      <?php include '../includes/footer.php'; ?>
 
-
     <!-- Bootstrap JS (optional, but may be needed for some components) -->
     <?php include '../admin/includes/js_cdn.php'; ?>
 
-    <!-- Your Custom Scripts (if any) -->
+
     <script src="js/script.js"></script>
-    
 </body>
 </html>
