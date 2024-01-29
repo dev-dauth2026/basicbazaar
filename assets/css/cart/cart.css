@@ -1,0 +1,9 @@
+.image-article{
+    height: 50px;
+    width: 90px;
+
+}
+.cart-image{
+    height: 60px;
+    object-fit: cover;
+}

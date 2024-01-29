@@ -1,0 +1,15 @@
+
+
+# .gitignore
+
+# Ignore the .env file
+.env
+
+# Ignore entire "assets/images" folder
+assets/images/*
+
+# Ignore entire "admin/product_images" folder
+admin/product_images/*
+
+
+

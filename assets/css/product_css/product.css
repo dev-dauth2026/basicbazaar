@@ -1,0 +1,72 @@
+.custome-image{
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+}
+
+
+.custom_product:hover{
+
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.detail-image{
+    position: relative;
+    overflow:hidden;
+}
+
+
+.carousel-inner .image{
+    height: 400px;
+    width: 100%;
+    object-fit: contain;
+}
+.detail-image .image2, .detail-image .image3, .detail-image .image4{
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+}
+
+.carousel-indicators button {
+    width: 100px; /* Adjust the width of the dot button */
+    height: 50px; /* Adjust the height of the dot button */
+    border-radius: 20px; /* Make it round */
+    border: 2px solid #fff; /* Add a border for better visibility */
+}
+
+.carousel-indicators img {
+    width: 100%; /* Make the image fill the dot button */
+    height: 100%; /* Make the image fill the dot button */
+    cursor: pointer; /* Change cursor to pointer for better user experience */
+}
+.carousel .carousel-inner{
+    padding: 60px 10px;
+}
+
+.related-product img{
+    height: 120px;
+    width: 100%;
+    object-fit: contain;
+}
+
+
+ .rating span{
+    font-size: 10px;
+}
+
+.related-product button{
+    width: 40px;
+
+}
+
+.costume-slider{
+    transition: 1s all ease;
+}
+
+/* .related-product .carousel-item {
+    width: 200px;
+} */
+.custom-carousel-column {
+    transition: transform 1s ease;
+}
+

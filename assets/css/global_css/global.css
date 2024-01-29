@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.logo{
+    height: 40px;
+    width: 150px;
+    object-fit: contain;
+}
+
+a, li{
+    text-decoration: none;
+
+}
+
+ul,li{
+    list-style: none;
+}
+
+button{
+    opacity: 1;
+}
+button:hover{
+    opacity: 0.8
+}
