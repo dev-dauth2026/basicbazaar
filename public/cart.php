@@ -77,8 +77,6 @@ if (isset($_POST['add_to_cart'])){
     CalculateTotalPrice();
 
 
-}else{
-    header('location : product-details.php');
 }
 
 // calculate total
