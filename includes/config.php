@@ -5,17 +5,18 @@ ini_set('log_errors', 1);
 
 ?> -->
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
+
 // Database configuration
-$host =getenv('DB_HOST'); 
-$username =  getenv('DB_USERNAME'); 
-$password = getenv('DB_PASSWORD');
-$database = getenv('DB_DATABASE'); 
+$host = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USERNAME'];
+$password = $_ENV['DB_PASSWORD'];
+$database = $_ENV['DB_DATABASE'];
 
 // Create a connection
 $conn = new mysqli($host, $username, $password, $database);
