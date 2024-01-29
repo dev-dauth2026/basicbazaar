@@ -25,3 +25,9 @@ button{
 button:hover{
     opacity: 0.8
 }
+
+.custom-hr {
+    height: 4px; 
+    color:#ffc107;
+    background-color: #ffc107; 
+}
