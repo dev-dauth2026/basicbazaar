@@ -4,6 +4,11 @@ session_start();
 
 include '../includes/config.php'; 
 
+if($_SESSION['logged_in']){
+    header('location: account.php');
+    exit;
+}
+
 if(isset($_POST['signup'])){
     $name = $_POST['name'];
     $phone = $_POST['phone'];
@@ -117,6 +122,12 @@ if(isset($_POST['signup'])){
                 
                     <input type="submit" class ="btn btn-warning" name="signup" value="Sign Up">
                 
+            </div>
+            <div class="form-group  d-flex flex-column ">
+                <p>
+                Do you already have an account? <a href="login.php" class="">Login</a>
+                </p>
+            
             </div>
             
         </form>
