@@ -41,15 +41,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" href="cart.php"><i class="fas fa-shopping-cart fs-4"></i></a>
                         </li>
-
-                        <li class="nav-item">
-                           <?php if(!$_SESSION['logged_in']) {
-                            echo '<a class="nav-link text-light" href="signup.php">Sign Up</a>';
+                        <?php if(!isset($_SESSION['logged_in'])) {
+                           
+                            echo '
+                            <li class="nav-item">
+                            <a class="nav-link text-light" href="signup.php">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link text-light" href="login.php">Login</a>
+                            </li>
+                            
+                            ';
+                            
                            }else{
-                            echo '<a class="nav-link text-light" href="account.php"><i class="far fa-user-circle fs-4"></i></a>';
+                            echo '
+                            <li class="nav-item">
+                            <a class="nav-link text-light" href="account.php"><i class="far fa-user-circle fs-4"></i></a>
+                            </li>
+                            ';
                            } 
-                           ?>
-                        </li>
+                        
+                        ?>
                        
                     </div>
         
