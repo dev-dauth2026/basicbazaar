@@ -4,6 +4,42 @@ session_start();
 
 include '../includes/config.php'; 
 
+if(isset($_SESSION['logged_in'])){
+    header('location: account.php');
+}
+
+if(isset($_POST['login'])){
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+
+    $stmt = $conn->prepare('SELECT user_id,user_name,user_email,password FROM users where user_email=? AND password=? LIMIT 1');
+    $stmt->bind_param('ss', $email, $password);
+    if($stmt->execute()){
+        $stmt->bind_result($user_id,$user_name,$user_email,$password);
+        $stmt->store_result();
+        
+        if($stmt->num_rows ==1){
+           $stmt->fetch();
+
+           $_SESSION['user_id'] = $user_id;
+           $_SESSION['user_name'] = $user_name;
+           $_SESSION['user_email'] = $user_email;
+           $_SESSION['logged_in'] = true;
+
+           header('location: account.php?login=You have been logged in successfully.');
+
+        }else{
+            header('location: login.php?error=Credential did not match.');
+        }
+    }else{
+        header('location: login.php?error=Something went wrong.');
+    }
+
+    
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +69,7 @@ include '../includes/config.php';
       <!-- Include product card -->
 <div class="container py-5">
     <div class="row col-6 mx-auto my-5 p-5 shadow rounded">
-        <div class="  mx-auto d-flex flex-column mb-4">
+        <div class="  mx-auto d-flex flex-column mb-2">
         <h3 class="text-center">Login</h3>
         <div class=" col-4 mx-auto custom-hr"></div>
         <hr class="text-warning">
@@ -41,7 +77,11 @@ include '../includes/config.php';
         
 
         <form class="mx-auto mb-4 d-flex flex-column flex-wrap justify-content-between gap-3 " method="post" action="login.php" >
-        <p class="text-danger">  <?php if (isset($_GET['error'])) {echo  $_GET['error'] ;      }?></p>
+          <?php if (isset($_GET['error'])) {
+            echo '<p class="text-danger">';
+            echo  $_GET['error'] ; }
+            echo'</p>';
+            ?>
             
             <div class="form-group  d-flex flex-column gap-2">
             <label for="email">Email</label>
