@@ -4,7 +4,34 @@
 
  session_start();
  include '../includes/config.php';
- 
+
+ if(isset($_GET["category_id"])){
+    $category_id = $_GET["category_id"];
+    $results =$conn->query ("SELECT * FROM `products` WHERE category_id = $category_id");
+   
+
+ }elseif(isset($_GET['search_input'])){
+    $searchTerm = $_GET['search_input'];
+    if(count($searchTermArray = explode(' ',$searchTerm))>1){
+        foreach($searchTermArray as $word){
+            $conditions[] = "product_name LIKE '%$word%'";
+        }
+          // Combine conditions using OR to allow any match
+         $combinedConditions = implode(' AND ', $conditions);
+       
+        $search_query = "SELECT * FROM `products` WHERE $combinedConditions";
+    }else{
+        $search_query = "SELECT * FROM `products` WHERE product_name LIKE '%$searchTerm%'";
+    }
+    
+    $results = $conn->query($search_query);
+
+ } else{
+    $results  =$conn->query("SELECT * from `products`");
+    
+ }
+
+ $products = $results;
  ?>
 <!DOCTYPE html>
 <html lang="en">
