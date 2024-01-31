@@ -69,6 +69,13 @@ if(isset($_POST['login'])){
       <!-- Include product card -->
 <div class="container py-5">
     <div class="row col-6 mx-auto my-5 p-5 shadow rounded">
+       
+        <?php if (isset($_GET['logged_out'])) {
+            echo '<p class="bg-success-subtle d-flex align-item-center text-center rounded mb-4 py-2 px-3">';
+            echo  $_GET['logged_out'] ; }
+            echo'</p>';
+            ?>
+       
         <div class="  mx-auto d-flex flex-column mb-2">
         <h3 class="text-center">Login</h3>
         <div class=" col-4 mx-auto custom-hr"></div>
@@ -82,6 +89,7 @@ if(isset($_POST['login'])){
             echo  $_GET['error'] ; }
             echo'</p>';
             ?>
+            
             
             <div class="form-group  d-flex flex-column gap-2">
             <label for="email">Email</label>
