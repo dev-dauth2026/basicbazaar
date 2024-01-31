@@ -5,6 +5,7 @@ session_start();
 include '../includes/config.php'; 
 
 if(isset($_GET['logged_out'])){
+    unset($_SESSION['user_id']);
     unset($_SESSION['user_name']);
     unset($_SESSION['user_email']);
     unset($_SESSION['logged_in']);
