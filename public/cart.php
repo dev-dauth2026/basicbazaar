@@ -147,9 +147,7 @@ function CalculateTotalPrice(){
                             <div class="d-flex ">
                                 <div class="image-article d-flex justify-content-center">
                                     <img class="cart-image " src="../admin/product_images/<?php echo $value['product_image'] ?>" alt="<?php echo $value['product_name'] ?>" >
-                                </div>
-                                
-                                
+                                </div>   
                             </div>
                         </td>
                         <td>
