@@ -4,7 +4,7 @@ session_start();
 
 include '../includes/config.php'; 
 
-if($_SESSION['logged_in']){
+if(isset($_SESSION['logged_in'])){
     header('location: account.php');
     exit;
 }
@@ -43,8 +43,10 @@ if(isset($_POST['signup'])){
             $stmt2 = $conn->prepare("INSERT INTO users (user_name,user_phone,user_email,password,created_at)
                             VALUES (?,?,?,?,?)");
             $stmt2->bind_param("sssss", $name,$phone,$email,$password,$created_at);
-
+            
             if($stmt2->execute()){
+                $user_id = $stmt2->insert_id;
+                $_SESSION['user_id'] = $user_id;
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_name'] = $name;
                 $_SESSION['logged_in'] = true;
