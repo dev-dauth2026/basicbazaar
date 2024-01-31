@@ -1,0 +1,9 @@
+.order-images{
+    height: 50px;
+    object-fit: contain;
+}
+.image-article{
+    height: 50px;
+    width: 90px;
+
+}
