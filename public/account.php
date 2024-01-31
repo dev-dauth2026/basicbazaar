@@ -20,7 +20,7 @@ if(!isset($_SESSION['logged_in'])){
 
 if(isset($_SESSION['logged_in'])){
     $user_id = $_SESSION['user_id'];
-    $stmt = $conn->prepare('SELECT * FROM orders WHERE user_id=?');
+    $stmt = $conn->prepare('SELECT * FROM orders WHERE user_id=? ORDER BY order_date DESC');
     $stmt->bind_param('i', $user_id);
     $stmt->execute();
 
@@ -69,7 +69,7 @@ if(isset($_SESSION['logged_in'])){
                 </div>
                 <h3 class="text-center">My Account </h3>
                 <div class=" col-4 mx-auto custom-hr"></div>
-                <hr class="text-warning">
+              
                 <div class="">
                 <?php if (isset($_GET['register'])){ 
                     echo '<p>Welcome,';
@@ -93,7 +93,7 @@ if(isset($_SESSION['logged_in'])){
             </div>
             
             <div class="p-3 col-12 d-flex  gap-2">
-                <a href="#orders" class="btn col-3 gap-3 border d-flex align-items-center justify-content-center p-5 text-center bg-secondary-subtle ">
+                <a href="orders.php" class="btn col-3 gap-3 border d-flex align-items-center justify-content-center p-5 text-center bg-secondary-subtle ">
                 <span class="fs-2 font-bold">12</span> 
                 <div class="">Your Orders</div>   
                 </a>
@@ -111,17 +111,17 @@ if(isset($_SESSION['logged_in'])){
 
             <section class="mt-5" data-bs-spy="scroll" data-bs-smooth-scroll="true" id="orders">
                 <h3 class="text-center">Your Orders</h3>
-                <hr class="col-2 mx-auto">
+                <hr class="col-2 mx-auto text-warning">
                 <div>
-                    <?php if($row= $orders->fetch_assoc()) { ?>
-                    <table class="table table-borderless table-hover">
+                    <?php if($orders) { ?>
+                    <table class="table table-borderless table-hover table-striped">
                         <thead>
                             <tr>
                                 <th class="bg-warning">Order Id</th>
                                 <th class="bg-warning">Order Cost</th>
                                 <th class="bg-warning">Order Status</th>
                                 <th class="bg-warning">Order Date</th>
-                                <th class="bg-warning">Action</th>
+                                <th class="bg-warning ">Action</th>
                             </tr>
                            
                         </thead>
@@ -132,10 +132,18 @@ if(isset($_SESSION['logged_in'])){
                                 <td>$<?php echo $row['order_cost'] ?> </td>
                                 <td><?php echo $row['order_status'] ?> </td>
                                 <td><?php echo $row['order_date'] ?> </td>
-                                <td>
-                                    <form action="" method="GET">
-                                    <button class="border border-0 bg-transparent" type="submit"><i class="far fa-eye"></i></button>
-                                    </form>
+                                <td class="">
+                                    <div class="d-flex gap-2 ">
+                                        <form action="order-details.php" method="GET" >
+                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id'] ?>" >
+                                            <button title="view order details" class="border border-0 bg-transparent" name="order_details" type="submit"><i class="far fa-eye"></i></button>
+                                        </form>
+                                        <form action="" method="GET">
+                                             <button title="cancel the order" class="border border-0 bg-transparent" name="cancel_order" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </div>
+                                   
+                                  
                                 </td>
 
 
