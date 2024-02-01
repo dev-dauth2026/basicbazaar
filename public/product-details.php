@@ -1,7 +1,29 @@
 
-
  <!-- Include Navbar -->
- <?php include '../includes/config.php'; ?>
+ <?php 
+ session_start();
+ include '../includes/config.php'; 
+ 
+ if(isset($_GET["product_details"])){
+    $product_details_id = $_GET['product_details'];
+    $product_detail_query  =$conn->prepare ("SELECT * from `products` WHERE product_id = ?");
+    $product_detail_query->bind_param("i", $product_details_id);
+    $product_detail_query->execute();
+    $result_query = $product_detail_query->get_result();
+
+}
+
+
+if(isset($_GET["category_id"])){
+    $category_id = $_GET["category_id"];
+    $product_details_id = $_GET['product_details'];
+    $category_query =$conn->prepare ("SELECT * from `products` WHERE category_id = ? AND product_id != ?");
+    $category_query->bind_param("ii", $category_id,$product_details_id);
+    $category_query->execute();
+    $category_result_query = $category_query->get_result();
+}
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,59 +50,26 @@
     
       <!-- Include product card -->
 <div class="container py-5">
-    <class class="row ">
-            <?php 
-
-            if(isset($_GET["product_details"])){
-                    $product_details_id = $_GET['product_details'];
-                    $product_detail_query  = "SELECT * from `products` WHERE product_id = $product_details_id";
-
-                    $result_query = mysqli_query($conn,$product_detail_query);
-                    while ($row = mysqli_fetch_array($result_query)) {
-                        $product_detail_id = $row["product_id"];
-                        $product_detail_name = $row["product_name"];
-                        $product_detail_category_id = $row["category_id"];
-                        $product_detail_brand_id = $row["brand_id"];
-                        $product_detail_price = $row["product_price"];
-                        $product_detail_description = $row["product_description"];
-                        $product_detail_image1 = $row["product_img1"];
-                        $product_detail_image2 = $row["product_img2"];
-                        $product_detail_image3 = $row["product_img3"];
-                        $image_array = [$product_detail_image1,$product_detail_image2,$product_detail_image3];
-
-                        $product_category_name_query =  "SELECT * FROM `category` WHERE category_id = $product_detail_category_id";
-                        $category_name_query_result  = mysqli_query($conn,$product_category_name_query);
-                        while ($row = mysqli_fetch_array($category_name_query_result)) {
-                            $detail_product_category_name = $row["category_name"];
-                        }
-
-                        $product_brand_name_query =  "SELECT * FROM `brand` WHERE brand_id = $product_detail_brand_id";
-                        $brand_name_query_result  = mysqli_query($conn,$product_brand_name_query);
-                        while ($row = mysqli_fetch_array($brand_name_query_result)) {
-                            $detail_product_brand_name = $row["brand_name"];
-                        }
-
-
-                        echo "
-
+    <class class="row ">    
                         <!--  product detail carousel  -->
-
+                    <?php if ($result_query->num_rows>0) { ?>
+                    <?php  while ($row = $result_query->fetch_assoc()) { ?>
                         <div class='col-md-6 detail-image flex-column'>
                             <div id='carouselExampleIndicators' class='carousel slide'>
                                 <div class='carousel-indicators'>
-                                        <img data-bs-target='#carouselExampleIndicators' data-bs-slide-to='0'  aria-current='true' aria-label='Slide 1' class= 'active image2' src='../admin/product_images/$product_detail_image1' alt='$product_detail_name'>
-                                        <img data-bs-target='#carouselExampleIndicators' data-bs-slide-to='1' aria-label='Slide 2' class= 'image3' src='../admin/product_images/$product_detail_image2' alt='$product_detail_name'>
-                                        <img data-bs-target='#carouselExampleIndicators' data-bs-slide-to='2' aria-label='Slide 3' class= 'image4' src='../admin/product_images/$product_detail_image3' alt='$product_detail_name'>
+                                        <img data-bs-target='#carouselExampleIndicators' data-bs-slide-to='0'  aria-current='true' aria-label='Slide 1' class= 'active image2' src='../admin/product_images/<?php echo $row['product_img1']?>' alt='<?php echo $row['product_name']?>'>
+                                        <img data-bs-target='#carouselExampleIndicators' data-bs-slide-to='1' aria-label='Slide 2' class= 'image3' src='../admin/product_images/<?php echo $row['product_img2']?>' alt='<?php echo $row['product_name']?>'>
+                                        <img data-bs-target='#carouselExampleIndicators' data-bs-slide-to='2' aria-label='Slide 3' class= 'image4' src='../admin/product_images/<?php echo $row['product_img3']?>' alt='<?php echo $row['product_name']?>'>
                                 </div>
                                 <div class='carousel-inner'>
                                     <div class='carousel-item active'>
-                                    <img class= 'image d-block w-100' src='../admin/product_images/$product_detail_image1' alt='$product_detail_name'>
+                                    <img class= 'image d-block w-100' src='../admin/product_images/<?php echo $row['product_img1']?>' alt='<?php echo $row['product_name']?>'>
                                     </div>
                                     <div class='carousel-item'>
-                                    <img class= 'image d-block w-100' src='../admin/product_images/$product_detail_image2' alt='$product_detail_name'>
+                                    <img class= 'image d-block w-100' src='../admin/product_images/<?php echo $row['product_img2']?>' alt='<?php echo $row['product_name']?>'>
                                     </div>
                                     <div class='carousel-item'>
-                                    <img class= 'image d-block w-100' src='../admin/product_images/$product_detail_image3' alt='$product_detail_name'>
+                                    <img class= 'image d-block w-100' src='../admin/product_images/<?php echo $row['product_img3']?>' alt='<?php echo $row['product_name']?>'>
                                     </div>
                                 </div>
                                
@@ -93,9 +82,29 @@
                         <!--  product detail information  -->
                         <div class='col-md-6 '>
                             <div class='w-90'>
-                                <small>$detail_product_brand_name</small>
-                                <h4> $product_detail_name</h4>
-                                <small class='text-secondary-subtle text-secondary'>Category: $detail_product_category_name </small>
+                                <?php 
+                                $product_detail_brand_id = $row['brand_id'];
+                                $product_brand_name_query =  $conn->prepare("SELECT * FROM `brand` WHERE brand_id = ?");
+                                $product_brand_name_query->bind_param("i",$product_detail_brand_id);
+                                $product_brand_name_query->execute();
+                                $brand_name_query_result = $product_brand_name_query->get_result();
+                                while ($brand_row = $brand_name_query_result->fetch_assoc()) { ?>
+                                        <small><?php echo $brand_row['brand_name']?></small>
+                                   <?php }?>
+                                <h4> <?php echo $row['product_name']?></h4>
+                                <?php 
+                                $category_id = $row['category_id'];
+                                $product_category_name_query =$conn->prepare ( "SELECT * FROM `category` WHERE category_id = ?");
+                                $product_category_name_query->bind_param("i",$category_id);
+                                $product_category_name_query->execute();
+                                $category_name_query_result = $product_category_name_query->get_result();
+
+                                while ($category_row = $category_name_query_result->fetch_assoc()) { ?>
+                                    <small class='text-secondary-subtle text-secondary'>Category: <?php echo $category_row["category_name"] ?> </small>
+                                <?php }  ?>
+
+                               
+                                
                                 <!-- Star Rating -->
                                 <div class='rating mb-3 mt-2'>
                                 <span class='fas fa-star text-warning'></span> 
@@ -106,19 +115,17 @@
                                 </div>
                                 
                             
-                                <h6>Price: <sup>$</sup> <span class='fs-3'>$product_detail_price </span> </h6>
+                                <h6>Price: <sup>$</sup> <span class='fs-3'><?php echo $row['product_price']?> </span> </h6>
                             
-                                <p class='mb-3'>About the product: $product_detail_description</p>
+                                <p class='mb-3'>About the product: <?php echo $row['product_description']?> </p>
 
 
                                 <form method='post' action='cart.php'>
-
-                                    <input name='detail_product_id' type='hidden' value='$product_detail_id'>
-                                    <input name='detail_product_name' type='hidden' value='$product_detail_name'>
-                                    <input name='detail_product_price' type='hidden' value='$product_detail_price'>
-                                    <input name='detail_product_image' type='hidden' value='$product_detail_image1'>
+                                    <input name='detail_product_id' type='hidden' value='<?php echo $row['product_id']?>'>
+                                    <input name='detail_product_name' type='hidden' value='<?php echo $row['product_name']?>'>
+                                    <input name='detail_product_price' type='hidden' value='<?php echo $row['product_price']?>'>
+                                    <input name='detail_product_image' type='hidden' value='<?php echo $row['product_img1']?>'>
                                
-                        
                                      <!--  radio button list -->
                                     <div class='radio-button d-flex mb-3 gap-3'>
                                         <div class='form-check'>
@@ -174,7 +181,7 @@
                                     <div class ='col-6 d-flex align-items-center gap-2'>
                                         <lable class='text-nowrap me-3'>Select Quantity:</lable>
                                         <button class='btn border outline'> - </button>
-                                        <input type='input' value='1' class='form-select' name='product_quantity' >
+                                        <input type='number' value='1' class='form-select' name='product_quantity' >
                                         <button class='btn border outline' > + </button>
                                         
                                     </div>
@@ -187,76 +194,15 @@
 
                             </div>
                         </div>
+                        <?php } ?>
+                     <?php } ?>
+
                         <!--  product detail carousel ends -->
-
-                        
-                        ";
-
-                        }
-                    }
-
-            ?>
 
 
              <!-- related product carousel  -->
-        <div class='related-product   flex-column mt-5 '>
-            <h4>Related products</h4>
-            <div id='relatedProduct' class='position-relative mt-5'>
-                <div class='overflow-auto d-flex flex-row  bg-opacity-85  gap-3 costume-slider' id='custome-carousel-item' onload="showSlide()">
-                    <?php 
-              
-                            $all_products_list  = "SELECT * from `products`";
-
-                            $result_query = mysqli_query($conn,$all_products_list);
-                            $row = mysqli_fetch_array($result_query);
-                            $i=0;
-
-                            while ($row = mysqli_fetch_array($result_query) ) {
-                            $i+=1;
-                            //     $product_detail_id = $row["product_id"];
-                                $product_detail_name = $row["product_name"];
-                                $product_detail_price = $row["product_price"];
-                                    $product_detail_image1 = $row["product_img1"];
-                           
-                            echo "
-                                
-                                    <div  class=' custom-carousel-column d-flex flex-column justify-content-center border p-2 col-lg-2 col-md-4 col-sm-6 col-xs-12 px-5' id='slide" .($i). "'>
-                                        <img class='d-block mb-2' src='../admin/product_images/" . $product_detail_image1 . "' alt='" . $product_detail_name . "'>
-                                            <h6 class='text-truncate text-warning-subtle'>$product_detail_name</h6>
-                                
-                                            <!-- Star Rating -->
-                                        <div class='rating'>
-                                            <span class='fas fa-star text-warning'></span> 
-                                            <span class='fas fa-star text-warning'></span> 
-                                            <span class='fas fa-star text-warning'></span> 
-                                            <span class='fas fa-star-half-alt text-warning'></span> 
-                                            <span class='far fa-star text-warning'></span> 
-                                        </div>
-                                        <h5>$ $product_detail_price</h5>
-                                        
-                                    </div>
-                                    
-                                ";
-                                
-                            }
-                    ?>
-             
-
-                </div>
-                  <!-- Previous Button -->
-                <button type="button" class="position-absolute start-0 top-50 z-1 border border-0 border-none outline-none" onclick="Prev()">
-                    <i class="fas fa-chevron-left fa-2x"></i>
-                </button>
-
-                <!-- Next Button -->
-                <button type="button" class=" position-absolute end-0 top-50 z-1 border border-none" onclick="Next()">
-                <i class="fas fa-chevron-right fa-2x"></i>
-                </button>
-             
-               
-            </div>   
-    
-        </div>
+      <?php include '../includes/related_product_carousel.php'?>
+       
         <!-- related product carousel  ends-->
         <?php include "../includes/customer_review.php" ?>
 

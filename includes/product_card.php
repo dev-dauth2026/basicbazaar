@@ -1,14 +1,13 @@
 
-
 <div class="container p-2">
         <div class="row col-12 wrap min-vh-100 ">
-
             <!-- Product Card -->
             <?php  if($products->num_rows>0){ ?>
               <?php  while ($row = $products->fetch_assoc()) { ?>
+              
                         <div class=' col-lg-3 col-md-4 col-sm-6 col-12 '>
                             <div class='custom_product card p-2 mb-2' >
-                                <a href='product-details.php?product_details=<?php echo $row['product_id']?>' class='pointer'>
+                                <a href='product-details.php?product_details=<?php echo $row['product_id']?>&category_id=<?php echo $row['category_id'] ?>' class='pointer'>
                                     <img src='../admin/product_images/<?php echo $row['product_img1']?>' alt='Product Image' class='card-img-top custome-image '>
                                 </a>
                                 <div class='card-body'>

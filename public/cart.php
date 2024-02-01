@@ -1,7 +1,7 @@
-<?php include '../includes/config.php'; ?>
+
 <?php
 session_start();
-
+include '../includes/config.php';
 if (isset($_POST['add_to_cart'])){
     if(isset($_SESSION['cart'])){
         $product_id_array = array_column($_SESSION['cart'], 'detail_product_id');
@@ -9,10 +9,11 @@ if (isset($_POST['add_to_cart'])){
         if(!in_array($_POST['detail_product_id'],$product_id_array)){
             $product_id = $_POST['detail_product_id'];
             $product_name = $_POST['detail_product_name'];
-            $product_price = $_POST['detail_product_price'];
+            $product_price =$_POST['detail_product_price'];
             $product_quantity = $_POST['product_quantity'];
             $product_image = $_POST['detail_product_image'];
-
+            
+            
             $product_array = array (
                 'product_id'=>$product_id,
                 'product_name'=>$product_name,
@@ -32,7 +33,7 @@ if (isset($_POST['add_to_cart'])){
         $product_id = $_POST['detail_product_id'];
         $product_name = $_POST['detail_product_name'];
         $product_price = $_POST['detail_product_price'];
-        $product_quantity = $_POST['product_quantity'];
+        $product_quantity =$_POST['product_quantity'];
         $product_image = $_POST['detail_product_image'];
 
         $product_array = array (
@@ -89,7 +90,6 @@ function CalculateTotalPrice(){
         $product_key = $_SESSION['cart'][$key];
         $product_price = $product_key['product_price'];
         $product_quantity = $product_key['product_quantity'];
-
         $totalPrice += $product_price * $product_quantity;
     }
 

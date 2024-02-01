@@ -98,7 +98,7 @@ if(isset($_SESSION['logged_in'])){
                                 <input type="hidden" name="order_id" value="<?php echo $row['order_id'] ?>">
                                 <button title="view order details" class="border border-0 bg-transparent" name="product_details" type="submit"><i class="far fa-eye"></i></button>
                             </form> -->
-                            <a href="product-details.php?product_details=<?php echo $row['product_id'] ?>" title="view order details" class="text-secondary border border-0 bg-transparent" name="product_details" type="submit"><i class="far fa-eye"></i></a>
+                            <a href="product-details.php?product_details=<?php echo $row['product_id'] ?>" title="view order details" class="text-secondary border border-0 bg-transparent" name="product_details" ><i class="far fa-eye"></i></a>
                             <form action="" method="GET">
                                     <button title="cancel the order" class="border border-0 bg-transparent" name="cancel_order" type="submit"><i class="fas fa-trash-alt"></i></button>
                             </form>

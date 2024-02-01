@@ -1,72 +1,43 @@
-<div class='related-product col-md-12   flex-column mt-5'>
-<h4>Related products</h4>
-
-<div id='relatedProduct2' class='carousel slide'>
-    <div class='carousel-inner'>
-        <div class='carousel-item active'>
-            <div class='row'>
-                <div class='col-md-2'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image1' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-2'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image2' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-2'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image3' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-2'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image1' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-2'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image2' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-2'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image3' alt='$product_detail_name'>
-                </div>
-            </div>
-        </div>
-        <div class='carousel-item'>
-            <div class='row'>
-                <div class='col-md-4'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image1' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-4'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image2' alt='$product_detail_name'>
-                </div>
-                <div class='col-md-4'>
-                    <img class='d-block w-100' src='../admin/product_images/$product_detail_image3' alt='$product_detail_name'>
-                </div>
-            </div>
-        </div>
-        <!-- Add more carousel items as needed -->
-    </div>
-    <button class='carousel-control-prev' type='button' data-bs-target='#relatedProduct2' data-bs-slide='prev'>
-        <span class='carousel-control-prev-icon bg-secondary' aria-hidden='true'></span>
-    </button>
-    <button class='carousel-control-next' type='button' data-bs-target='#relatedProduct2' data-bs-slide='next'>
-        <span class='carousel-control-next-icon bg-secondary' aria-hidden='true'></span>
-    </button>
-</div>
 
 
 
+<div class='related-product   flex-column mt-5 '>
+            <h4>Related products</h4>
+            <div id='relatedProduct' class='position-relative mt-5'>
+                <div class='overflow-auto d-flex flex-row  bg-opacity-85  gap-3 costume-slider' id='custome-carousel-item' onload="showSlide()">
+                            <?php if($category_result_query->num_rows > 0) { ?>
+                                    <?php while ($category_result = $category_result_query->fetch_assoc()) {    ?>
+                                    <div  class=' custom-carousel-column d-flex flex-column justify-content-center border p-2 col-lg-2 col-md-4 col-sm-6 col-xs-12 px-5' id='slide" .($i). "'>
+                                        <img class='d-block mb-2' src='../admin/product_images/<?php echo $category_result['product_img1']?> ' alt=''>
+                                            <h6 class='text-truncate text-warning-subtle'><?php echo $category_result['product_name']?> </h6>
+                                
+                                            <!-- Star Rating -->
+                                        <div class='rating'>
+                                            <span class='fas fa-star text-warning'></span> 
+                                            <span class='fas fa-star text-warning'></span> 
+                                            <span class='fas fa-star text-warning'></span> 
+                                            <span class='fas fa-star-half-alt text-warning'></span> 
+                                            <span class='far fa-star text-warning'></span> 
+                                        </div>
+                                        <h5>$<?php echo $category_result['product_price']?> </h5>
+                                        
+                                    </div>
 
-</div>
+                                <?php } ?>
+                             <?php } ?>
 
-<!-- // Iterate through product images
-                        // Iterate through product images
-                            // for ($i = 0; $i < count($rows); $i += 5) {
-                            //     echo "<div class='carousel-item" . ($i === 0 ? " active" : "") . "'>"; // Add 'active' class to the first item
+                </div>
+                  <!-- Previous Button -->
+                <button type="button" class="position-absolute start-0 top-50 z-1 border border-0 border-none outline-none" onclick="Prev()">
+                    <i class="fas fa-chevron-left fa-2x"></i>
+                </button>
 
-                            //     echo "<div class='row'>";
-                            //     // Display up to 5 images in a single carousel item
-                            //     for ($j = $i; $j < min($i + 5, count($rows)); $j++) {
-                                    
-                            //         echo "<div class='col-md-2'>";
-                            //         echo "<img class='d-block w-100' src='../admin/product_images/" . $row["product_img"] . "' alt='" . $row[$i][1] . "'>";
-                            //         echo "</div>";
-                            //     }
-                            //     echo "</div>";
+                <!-- Next Button -->
+                <button type="button" class=" position-absolute end-0 top-50 z-1 border border-none" onclick="Next()">
+                <i class="fas fa-chevron-right fa-2x"></i>
+                </button>
+             
+               
+         </div>  
 
-                            //     echo "</div>";
-                            // } -->
+  </div>
