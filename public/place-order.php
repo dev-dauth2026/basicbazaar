@@ -10,15 +10,18 @@ if(isset($_POST['place_order']) && isset($_SESSION['logged_in'])){
     $email = $_POST['email'];
     $address = $_POST['address'];
     $city = $_POST['city'];
+    $state = $_POST['state'];
+    $postcode = $_POST['postcode'];
+    $country = $_POST['country'];
     $total_cost = $_SESSION['totalPrice'];
     $order_status = "on hold";
     $user_id = $_SESSION['user_id'];
     $order_date = date("Y-m-d H:i:s");
    
-    $stmt = $conn->prepare ("INSERT INTO orders (order_cost,order_status,user_id,user_phone,user_email,user_city,user_address,order_date) 
-            VALUES (?,?,?,?,?,?,?,?)") ;
+    $stmt = $conn->prepare ("INSERT INTO orders (order_cost,order_status,user_id,user_phone,user_email,user_address,user_city,user_state,user_postcode,user_country,order_date) 
+            VALUES (?,?,?,?,?,?,?,?,?,?,?)") ;
 
-    $stmt->bind_param("isisssss", $total_cost, $order_status,$user_id,$phone,$email,$city,$address,$order_date);
+    $stmt->bind_param("isisssssiss", $total_cost, $order_status,$user_id,$phone,$email,$address,$city,$state,$postcode,$country,$order_date);
 
     $stmt->execute() ;
 
