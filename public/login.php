@@ -26,7 +26,13 @@ if(isset($_POST['login'])){
            $_SESSION['user_email'] = $user_email;
            $_SESSION['logged_in'] = true;
 
-           header('location: account.php?login=You have been logged in successfully.');
+           if(isset($_POST['checkout'])){
+            header("location: checkout.php?login=successfully logged in");
+
+           }else{
+            header("location: account.php?login=You have been logged in successfully.&checkout=". $_POST['checkout'] );
+
+           }
 
         }else{
             header('location: login.php?error=Credential did not match.');
@@ -101,6 +107,10 @@ if(isset($_POST['login'])){
             </div>
            
             <div class=" d-flex flex-column justify-content-end">
+                <?php if (isset($_GET['checkout'])) {?>
+                    <p>checkout</p>
+                <input type="hidden" name="checkout" value="1" >
+                <?php } ?>
                 
                     <input type="submit" class ="btn btn-warning" name="login" value="Login">
                 
