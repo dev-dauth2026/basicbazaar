@@ -80,7 +80,7 @@ if(isset($_SESSION['logged_in'])){
                     echo $_GET['register'];
                 }
                 ?>
-                 <?php if (isset($_GET['register']) || isset($_GET['login'])){ 
+                 <?php if ( isset($_GET['login'])){ 
                     echo '<p>Welcome,';
                     echo '<strong>';
                     echo $_SESSION['user_name'];

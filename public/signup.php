@@ -19,7 +19,7 @@ if(isset($_POST['signup'])){
     $user_address = '';
     $user_city = '';
     $user_state = '';
-    $user_postcode ='';
+    $user_postcode =0;
     $user_country = '';
 
 
@@ -46,8 +46,8 @@ if(isset($_POST['signup'])){
         // create new user
             $password = md5($password);
             $stmt2 = $conn->prepare("INSERT INTO users (user_name,user_phone,user_email,user_address,user_city,user_state,user_postcode,user_country,password,created_at)
-                            VALUES (?,?,?,?,?,?,?,?,?)");
-            $stmt2->bind_param("sssssisss", $name,$phone,$email,$user_address,$user_city,$user_state,$user_postcode,$user_country,$password,$created_at);
+                            VALUES (?,?,?,?,?,?,?,?,?,?)");
+            $stmt2->bind_param("ssssssisss", $name,$phone,$email,$user_address,$user_city,$user_state,$user_postcode,$user_country,$password,$created_at);
             
             if($stmt2->execute()){
                 $user_id = $stmt2->insert_id;
@@ -111,7 +111,7 @@ if(isset($_POST['signup'])){
             </div>
             <div class="form-group d-flex flex-column gap-2">
             <label for="phone">Phone</label>
-            <input class ="form-control" type="tel" name="phone" placeholder="Enter your phone..." required>
+            <input class ="form-control" type="tel" pattern="[0-9]{10}" name="phone" placeholder="Enter your phone..." required>
             </div>
             <div class="form-group  d-flex flex-column gap-2">
             <label for="email">Email</label>
