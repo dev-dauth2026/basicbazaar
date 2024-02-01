@@ -180,10 +180,7 @@ if(isset($_GET["category_id"])){
                                     
                                     <div class ='col-6 d-flex align-items-center gap-2'>
                                         <lable class='text-nowrap me-3'>Select Quantity:</lable>
-                                        <button class='btn border outline'> - </button>
-                                        <input type='number' value='1' class='form-select' name='product_quantity' >
-                                        <button class='btn border outline' > + </button>
-                                        
+                                        <input type='number' value='1' class='col-2 text-center p-1' name='product_quantity' >
                                     </div>
 
                                     <!--  select quantity ends -->
