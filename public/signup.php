@@ -16,6 +16,11 @@ if(isset($_POST['signup'])){
     $password = $_POST['password'];
     $confirmpassword = $_POST['confirmpassword'];
     $created_at = date('Y-m-d H:i:s');
+    $user_address = '';
+    $user_city = '';
+    $user_state = '';
+    $user_postcode ='';
+    $user_country = '';
 
 
     // if password did not match
@@ -40,9 +45,9 @@ if(isset($_POST['signup'])){
         }else{
         // create new user
             $password = md5($password);
-            $stmt2 = $conn->prepare("INSERT INTO users (user_name,user_phone,user_email,password,created_at)
-                            VALUES (?,?,?,?,?)");
-            $stmt2->bind_param("sssss", $name,$phone,$email,$password,$created_at);
+            $stmt2 = $conn->prepare("INSERT INTO users (user_name,user_phone,user_email,user_address,user_city,user_state,user_postcode,user_country,password,created_at)
+                            VALUES (?,?,?,?,?,?,?,?,?)");
+            $stmt2->bind_param("sssssisss", $name,$phone,$email,$user_address,$user_city,$user_state,$user_postcode,$user_country,$password,$created_at);
             
             if($stmt2->execute()){
                 $user_id = $stmt2->insert_id;
