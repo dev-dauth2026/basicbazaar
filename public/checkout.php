@@ -2,13 +2,11 @@
 
 session_start();
 
-include '../includes/config.php'; 
+include '../includes/config.php';
 
-if(!empty($_SESSION['cart']) && isset($_POST['checkout'])){
-
-}else{
-    header('location: index.php');
-}
+    if(empty($_SESSION['cart']) || !isset($_POST['checkout']) || !isset($_SESSION['logged_in']) ){
+        header('location: login.php');
+    }
 ?>
 
 <!DOCTYPE html>

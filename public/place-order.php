@@ -4,7 +4,7 @@ session_start();
 
 include '../includes/config.php'; 
 
-if(isset($_POST['place_order'])){
+if(isset($_POST['place_order']) && isset($_SESSION['logged_in'])){
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
@@ -37,6 +37,8 @@ if(isset($_POST['place_order'])){
         $stmt2->bind_param("iisiiis", $order_id,$product_id,$product_name,$product_price,$product_quantity,$user_id,$product_image);
         $stmt2->execute() ;
     }
+}else{
+    header("locatin: login.php");
 }
 ?>
 
