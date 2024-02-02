@@ -68,7 +68,7 @@ if(isset($_SESSION['logged_in'])){
                 <?php include '../includes/user_account_navbar.php' ?>
                 <div class="col-9 py-5 d-flex flex-column gap-5 ">
                     <div class="d-flex flex-column gap-2" >
-                        <h3 class="text-center text-warning">Change Your Password</h3>
+                        <h3 class="text-center text-warning">Order Details</h3>
                         <div class=" col-4 mx-auto custom-hr"></div>
 
                     </div>

@@ -61,10 +61,11 @@ if(isset($_SESSION['logged_in'])){
             <?php include '../includes/user_account_navbar.php' ?>
 
             <div class="col-9 py-5 d-flex flex-column gap-5 ">
-                <div class="  mx-auto d-flex flex-column">
-                    <h3 class="text-center">My Orders </h3>
-                    <div class=" col-4 mx-auto custom-hr"></div>
-                </div>
+            <div class="d-flex flex-column gap-2" >
+                <h3 class="text-center text-warning">My Orders </h3>
+                <div class=" col-4 mx-auto custom-hr"></div>
+
+            </div>
                 
                     <div class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
                         <?php if($orders) { ?>
