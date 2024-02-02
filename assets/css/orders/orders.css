@@ -1,7 +1,7 @@
 .orders-side{
     overflow-y: auto;
     /* background-image: linear-gradient(rgb(244, 229, 198),rgb(222, 218, 207),rgb(238, 233, 219),rgb(245, 239, 203)); */
-    background: linear-gradient(333deg, rgba(230,223,192,1) 26%, rgba(218,172,73,1) 100%);
+    background: linear-gradient(333deg, rgba(230,223,192,1) 26%, rgb(248, 176, 43) 100%);
 }
 .order-navbar{
     display: flex;
