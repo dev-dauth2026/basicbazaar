@@ -41,7 +41,7 @@ if(isset($_SESSION['logged_in'])){
     <?php include '../admin/includes/fontawesome_cdn.php'; ?>
 
     <!-- Your Custom CSS (if any) -->
-    <link rel="stylesheet" href="../assets/css/product_css/product.css">
+    <link rel="stylesheet" href="../assets/css/orders/orders.css">
     <link rel="stylesheet" href="../assets/css/global_css/global.css">
 </head>
 <body> 
@@ -54,58 +54,93 @@ if(isset($_SESSION['logged_in'])){
      <?php include '../includes/category_navbar.php'; ?>
 
     
-    <main class="container py-5">
-        <div class="row  mx-auto  p-5 gap-4  rounded">
-            <div class="  mx-auto d-flex flex-column">
-                <h3 class="text-center">My Orders </h3>
-                <div class=" col-4 mx-auto custom-hr"></div>
+    <main class="container-fluid">
+        
+        <div class="row p-5 ">
+            <div class="orders-side col-2  mx-0 px-0 py-4 rounded">
+                <nav class="order-navbar ">
+                    <h4 class="text-center">My Account</h4>
+                    <div class="d-flex justify-content-center w-100 ">
+                        <i class="order-users far fa-user-circle "></i>
+                       
+                    </div>
+                    <div class="custom-hr bg-secondary-subtle col-10 mx-auto"> </div>
+                    <ul class=" ">
+                        <li class="">
+                            <a href="">Dashboard</a>
+                        </li>
+                        <li><a href="">Profile</a></li>
+                        <li><a href="">Orders</a></li>
+                        <li><a href="">Carts</a></li>
+                        <li><a href="">Watch List</a></li>
+                        <li><a href="">Saved</a></li>
+                        <li><a href="">Settings</a></li>
+                        <li><a href="">Log out</a></li>
+
+                    </ul>
+                </nav>
+
             </div>
-            
-            <section class="mt-5" data-bs-spy="scroll" data-bs-smooth-scroll="true" id="orders">
-                <div>
-                    <?php if($orders) { ?>
-                    <table class="table table-borderless table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th class="bg-warning">Order Id</th>
-                                <th class="bg-warning">Order Cost</th>
-                                <th class="bg-warning">Order Status</th>
-                                <th class="bg-warning">Order Date</th>
-                                <th class="bg-warning ">Action</th>
-                            </tr>
-                           
-                        </thead>
-                        <body>
-                            <?php while ($row= $orders->fetch_assoc()) { ?>
-                            <tr>
-                                <td><?php echo $row['order_id'] ?> </td>
-                                <td>$<?php echo $row['order_cost'] ?> </td>
-                                <td><?php echo $row['order_status'] ?> </td>
-                                <td><?php echo $row['order_date'] ?> </td>
-                                <td class="">
-                                    <div class="d-flex gap-2 ">
-                                        <form action="order-details.php" method="GET" >
-                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id'] ?>" >
-                                            <button title="view order details" class="border border-0 bg-transparent" name="order_details" type="submit"><i class="far fa-eye"></i></button>
-                                        </form>
-                                        <form action="" method="GET">
-                                             <button title="cancel the order" class="border border-0 bg-transparent" name="cancel_order" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                    </div>
-                                   
-                                  
-                                </td>
-
-
-                            </tr>
-                            <?php } ?>
-                        </body>
-
-                    </table>
-                    <?php } ?>
-
+            <div class="col-10 py-5 d-flex flex-column gap-5 ">
+                <div class="  mx-auto d-flex flex-column">
+                    <h3 class="text-center">My Orders </h3>
+                    <div class=" col-4 mx-auto custom-hr"></div>
                 </div>
-            </section>
+                
+                    <div class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
+                        <?php if($orders) { ?>
+                            
+                                <?php while ($row= $orders->fetch_assoc()) { ?>
+                                    <div class="order-list d-flex flex-column gap-3 border p-3 rounded">
+                                        <div class="d-flex align-items-center bg-body-tertiary p-2">
+                                            <div class="">
+                                               Order Id : <?php echo $row['order_id'] ?>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between  p-1  gap-3 ">
+                                        
+                                            <div class="d-flex flex-column gap-2">
+                                                <small class="text-secondary fs-6">Date Placed</small>
+                                                <p><?php echo $row['order_date'] ?> </p> 
+                                            </div>
+                                            <div class="d-flex flex-column gap-2">
+                                                <small class="text-secondary fs-6">Total Cost</small>
+                                                <p class="fs-4">$<?php echo $row['order_cost'] ?> </p> 
+                                            </div>
+                                            <div class="d-flex flex-column gap-2">
+                                                <small class="text-secondary fs-6">Order Status</small>
+                                                <span class="p-1 text-center bg-warning rounded"><?php echo $row['order_status'] ?> </span>
+                                            </div>
+
+                                        
+                                            <div class="d-flex flex-column gap-2">
+                                            <small class="text-secondary fs-6">Actions</small>
+                                                <div class="d-flex gap-2 ">
+                                                    <form action="order-details.php" method="GET" >
+                                                        <input type="hidden" name="order_id" value="<?php echo $row['order_id'] ?>" >
+                                                        <button title="view order details" class="border border-0 bg-transparent" name="order_details" type="submit"><i class="far fa-eye"></i></button>
+                                                    </form>
+                                                    <form action="" method="GET">
+                                                        <button title="cancel the order" class="border border-0 bg-transparent" name="cancel_order" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            
+                                            
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    
+                                <?php } ?>
+                          
+                        <?php } ?>
+
+                    </div>
+
+            </div>
+           
 
             
 

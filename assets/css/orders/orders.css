@@ -1,0 +1,45 @@
+.orders-side{
+    overflow-y: auto;
+    /* background-image: linear-gradient(rgb(244, 229, 198),rgb(222, 218, 207),rgb(238, 233, 219),rgb(245, 239, 203)); */
+    background: linear-gradient(333deg, rgba(230,223,192,1) 26%, rgba(218,172,73,1) 100%);
+}
+.order-navbar{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    margin: 0;
+    padding: 0;
+ 
+}
+.order-navbar .order-users{
+    font-size: 60px;
+}
+.order-navbar ul{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.order-navbar ul li{
+    width: 100%;
+    padding: 15px 35px;
+    transition: 0.7s all ease;
+}
+
+.order-navbar ul li a{
+    color: black;
+    text-decoration: none;
+    
+
+}
+.order-navbar ul li:hover{
+    color: white;
+    background-color: rgba(128, 120, 104, 0.124)
+
+}
+
+.order-list:hover{
+    background-color: rgba(228, 198, 6, 0.37);
+}
