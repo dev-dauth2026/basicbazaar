@@ -30,12 +30,17 @@
 .users-side ul li a{
     color: black;
     text-decoration: none;
+    transition: 0.7s all ease;
     
 
 }
 .users-side ul li:hover{
-    color: white;
-    background-color: rgba(128, 120, 104, 0.124)
+    background-color: rgba(128, 120, 104, 0.124);  
+
+}
+
+.users-side ul li:hover a{
+    color: white; 
 
 }
 

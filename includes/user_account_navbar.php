@@ -8,36 +8,34 @@
         <div class="custom-hr bg-secondary-subtle col-10 mx-auto"> </div>
         <ul class=" ">
             <li class="">
-                <i class="fas fa-tachometer-alt me-3"></i>
-                <a href="account.php">Dashboard</a>
+                <a href="account.php"><i class="fas fa-tachometer-alt me-3"></i>Dashboard</a>
             </li>
             <li>
-                <i class="fas fa-user me-3"></i>
-                <a href="edit-account.php">Profile</a>
+                
+                <a href="edit-account.php"><i class="fas fa-user me-3"></i>Profile</a>
             </li>
             <li>
-                <i class="fas fa-box me-3"></i>
-                <a href="orders.php">Orders</a>
+                
+                <a href="orders.php"><i class="fas fa-box me-3"></i>Orders</a>
             </li>
             <li>
-                <i class="fas fa-shopping-cart me-3"></i>
-                <a href="cart.php">Carts</a>
+                
+                <a href="cart.php"><i class="fas fa-shopping-cart me-3"></i>Carts</a>
             </li>
             <li>
-                <i class="fas fa-eye me-3"></i>
-                <a href="">Watch List</a>
+                <a href=""><i class="fas fa-eye me-3"></i>Watch List</a>
             </li>
             <li>
-                <i class="fas fa-heart me-3"></i>
-                <a href="">Saved</a>
+                
+                <a href=""><i class="fas fa-heart me-3"></i>Saved</a>
             </li>
             <li>
-                <i class="fas fa-cog me-3"></i>
-                <a href="change-password.php">Settings</a>
+                
+                <a href="change-password.php"><i class="fas fa-cog me-3"></i>Settings</a>
             </li>
             <li>
-                <i class="fas fa-sign-out-alt me-3"></i>
-                <a  href="account.php?logged_out=true">logout</a>
+                
+                <a  href="account.php?logged_out=true"><i class="fas fa-sign-out-alt me-3"></i>logout</a>
             </li>
 
         </ul>
