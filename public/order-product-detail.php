@@ -51,6 +51,7 @@ if(isset($_SESSION['logged_in'])){
     <!-- Your Custom CSS (if any) -->
     <link rel="stylesheet" href="../assets/css/order-product-detail/order-product-detail.css">
     <link rel="stylesheet" href="../assets/css/global_css/global.css">
+    <link rel="stylesheet" href="../assets/css/users/users.css">
 </head>
 <body> 
 
@@ -62,25 +63,37 @@ if(isset($_SESSION['logged_in'])){
      <?php include '../includes/category_navbar.php'; ?>
 
     
-    <main class="container p-5 ">
-        <h3 class="text-center">Orders Details</h3>
-            <hr class="col-2 mx-auto text-warning">
-        <div class="row  ">
+    <main class="container-fuild">
+        <div class="row p-5">
+              <!-- -navbar  -->
+            <?php include '../includes/user_account_navbar.php' ?>
+            <div class="col-9 py-5 d-flex flex-column gap-5 ">
+                <div class="d-flex flex-column gap-2" >
+                    <h3 class="text-center text-warning">Change Your Password</h3>
+                    <div class=" col-4 mx-auto custom-hr"></div>
+
+                </div>
+
+                <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
+                    <?php while ($row= $order_product_detail->fetch_assoc()) { ?>
+                    <div class="col-6 d-flex justify-content-center ">
+                        <div class="order-product-detail d-flex justify-content-center">
+                            <img class="order-product-images" src="../admin/product_images/<?php echo $row['product_image'] ?>" alt="<?php echo $row['product_name'] ?>">
+                        </div>   
+                    </div>
+                    <div class="col-6" >
+                        <h3><?php echo $row['product_name'] ?> </h3>
+                        <p>Ratings: </p>
+                        <p>$<?php echo $row['product_price'] ?> </p>
+                        <p>Quantity: <?php echo $row['product_quantity'] ?> </p>
             
-            <?php while ($row= $order_product_detail->fetch_assoc()) { ?>
-            <div class="col-6 d-flex justify-content-center ">
-                <div class="order-product-detail d-flex justify-content-center">
-                    <img class="order-product-images" src="../admin/product_images/<?php echo $row['product_image'] ?>" alt="<?php echo $row['product_name'] ?>">
-                </div>   
+                    </div>
+                    <?php } ?>
+                </section>
             </div>
-            <div class="col-6" >
-                <h3><?php echo $row['product_name'] ?> </h3>
-                <p>Ratings: </p>
-                <p>$<?php echo $row['product_price'] ?> </p>
-                <p>Quantity: <?php echo $row['product_quantity'] ?> </p>
-    
-            </div>
-            <?php } ?>
+        
+            
+           
             
 
         </div>

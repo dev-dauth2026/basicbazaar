@@ -57,6 +57,7 @@ if(isset($_POST['change_password'])){
     <!-- Your Custom CSS (if any) -->
     <link rel="stylesheet" href="../assets/css/product_css/product.css">
     <link rel="stylesheet" href="../assets/css/global_css/global.css">
+    <link rel="stylesheet" href="../assets/css/users/users.css">
 </head>
 <body> 
 
@@ -68,35 +69,38 @@ if(isset($_POST['change_password'])){
      <?php include '../includes/category_navbar.php'; ?>
 
     
-    <main class="container py-5">
-        <div class="row col-6  mx-auto  p-5 gap-4  rounded shadow">
-            
-            <div class="  mx-auto d-flex flex-column">
-                <h3 class="text-center">Change your Account Password</h3>
-                <div class="col-10  mx-auto custom-hr"></div>
+    <main class="container-fluid">
+        <div class="row p-5">
+              <!-- -navbar  -->
+            <?php include '../includes/user_account_navbar.php' ?>
+            <div class="col-9 py-5 d-flex flex-column gap-5 ">
+                <div class="d-flex flex-column gap-2" >
+                    <h3 class="text-center text-warning">Change Your Password</h3>
+                    <div class=" col-4 mx-auto custom-hr"></div>
+
+                </div>
+
+                <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
+                    <form class="d-flex flex-column gap-3" action="change-password.php" method="POST" >
+                            <?php if(isset($_GET['error'])){
+                                echo '<p class="p-2 bg-danger-subtle text-danger px-3 rounded">';
+                                echo $_GET['error'];
+                                echo '</p>';
+                                } ?>
+                            <div class="form-group d-flex flex-column gap-2">
+                                <label for="newpassword">New Password </label>
+                                <input class="form-control" min="6" type="password" name="newpassword" placeholder="Enter your new password..." required>
+                            </div>
+                            <div class="form-group d-flex flex-column gap-2">
+                                <label for="confirmpassword">Confirm Password </label>
+                                <input class="form-control" min="6" type="password" name="confirmpassword" placeholder="Enter your new password..." required>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <input class="btn btn-warning" type="submit" name="change_password" value="Change Password">
+                            </div>
+                    </form>
+                </section>
             </div>
-          
-            <div  class=" mx-auto">
-                <form class="d-flex flex-column gap-3" action="change-password.php" method="POST" >
-                    <?php if(isset($_GET['error'])){
-                        echo '<p class="p-2 bg-danger-subtle text-danger px-3 rounded">';
-                        echo $_GET['error'];
-                        echo '</p>';
-                        } ?>
-                    <div class="form-group d-flex flex-column gap-2">
-                        <label for="newpassword">New Password </label>
-                        <input class="form-control" min="6" type="password" name="newpassword" placeholder="Enter your new password..." required>
-                    </div>
-                    <div class="form-group d-flex flex-column gap-2">
-                        <label for="confirmpassword">Confirm Password </label>
-                        <input class="form-control" min="6" type="password" name="confirmpassword" placeholder="Enter your new password..." required>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <input class="btn btn-warning" type="submit" name="change_password" value="Change Password">
-                    </div>
-                </form>
-            </div>
-            
         </div>
 
     </main>    

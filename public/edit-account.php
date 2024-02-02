@@ -36,6 +36,7 @@ if(!isset($_SESSION['logged_in'])){
 
     <!-- Your Custom CSS (if any) -->
     <link rel="stylesheet" href="../assets/css/product_css/product.css">
+    <link rel="stylesheet" href="../assets/css/users/users.css">
     <link rel="stylesheet" href="../assets/css/global_css/global.css">
 </head>
 <body> 
@@ -48,60 +49,90 @@ if(!isset($_SESSION['logged_in'])){
      <?php include '../includes/category_navbar.php'; ?>
 
     
-    <main class="container py-5">
-        <div class="row  mx-auto  p-5 gap-4  rounded">
-            
-            <div class="  mx-auto d-flex flex-column">
-                <div class="d-flex justify-content-end cursor-pointer">
-                    <a class="text-info" href="account.php?logged_out=true">logout</a>
-                </div>
-                <h3 class="text-center">My Account Details</h3>
-                <div class=" col-4 mx-auto custom-hr"></div>
-                <hr class="text-warning">
-              
-            </div>
-            
-         
+    <main class="container-fluid ">
+        <div class="row  p-5 ">
+            <!-- -navbar  -->
+            <?php include '../includes/user_account_navbar.php' ?>
 
-            <section>
-                <div  class=" col-8 mx-auto shadow b p-5">
-                    <table class="table table-borderless ">
-                        <tr>
-                            <th>Username:</th>
-                            <td>Dav</td>
-                            <td>
-                                <a href="edit-account.php?edit_username=1">Edit</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Email:</th>
-                            <td>dav@gmail.com</td>
-                            <td>
-                                <a href="edit-account.php?edit_username=1">Edit</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Address:</th>
-                            <td>Clayfield Brisbane QLD 4011</td>
-                            <td>
-                                <a href="edit-account.php?edit_username=1">Edit</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Password:</th>
-                            <td>xxxxxxxxxxxxx</td>
-                            <td>
-                                <a href="change-password.php?">Edit</a>
-                            </td>
-                        </tr>
+            <div class="col-9 py-5 d-flex flex-column gap-5 ">
+                <div class="d-flex flex-column gap-2" >
+                    <h3 class="text-center text-warning">My Profile </h3>
+                    <div class=" col-4 mx-auto custom-hr"></div>
 
-                    </table>
                 </div>
                 
-            </section>
+                <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
+                    <div class="d-flex flex-column">
+                        <h5 class="text-secondary">Your Photo</h5>
+                        <hr class="col-2  text-warning">
+                    </div>
+                    <div class="d-flex flex-row">
+                        <i class="user-profile fas fa-user-circle col-3"></i>
+                        <div class="d-flex flex-column gap-2 col-9">
+                            <p>Upload your profile image of appropriate file extension and size</p>
+                            <div class="d-flex align-items-center gap-3">
+                                <button class="btn btn-warning">Upload Image</button>
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                            
+                        </div>
 
-            
+                    </div>
+                   
+                </section>
+                <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
+                    <div class="d-flex flex-column">
+                        <h5 class="text-secondary">Personal Information</h5>
+                        <hr class="col-2  text-warning">
+                        <form class="d-flex flex-column gap-3">
+                                <div class="d-flex justify-content-between gap-3">
+                                    <div class="form-group col-5 d-flex flex-column gap-2">
+                                        <label for="username">Username:</label>
+                                        <input class="form-control " name="username" type="text" value="" required>
+                                    </div>
+                                    <div class="form-group col-5 d-flex flex-column gap-2">
+                                        <label for="phone">Phone:</label>
+                                        <input class="form-control " name="phone" type="tel" pattern="[0-9]{10}" value="" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group d-flex flex-column gap-2">
+                                    <label for="email">Email:</label>
+                                    <input class="form-control " name="email" type="email"  value="" required>
+                                </div>
+                                <div class="form-group d-flex flex-column gap-2">
+                                    <label for="address">Address:</label>
+                                    <input class="form-control " name="address" type="text"  value="" required>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="form-group col-3 d-flex flex-column gap-2">
+                                        <label for="city">City:</label>
+                                        <input class="form-control " name="city" type="text"  value="" required>
+                                    </div>
+                                    <div class="form-group col-3 d-flex flex-column gap-2">
+                                        <label for="state">State:</label>
+                                        <input class="form-control " name="state" type="text"  value="" required>
+                                    </div>
+                                    <div class="form-group d-flex flex-column gap-2">
+                                        <label for="postcode">Post Code:</label>
+                                        <input class="form-control " name="postcode" type="text"  value="" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <input class="btn border-warning text-warning" type="submit" name="update_user_profile" value="Save">
+                                </div>
+                                
 
+                    </form>
+                    </div>
+                </section>
+
+                <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
+                    
+                </section>
+
+
+            </div>
         </div>
 
     </main>    

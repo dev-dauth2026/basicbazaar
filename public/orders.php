@@ -41,7 +41,7 @@ if(isset($_SESSION['logged_in'])){
     <?php include '../admin/includes/fontawesome_cdn.php'; ?>
 
     <!-- Your Custom CSS (if any) -->
-    <link rel="stylesheet" href="../assets/css/orders/orders.css">
+    <link rel="stylesheet" href="../assets/css/users/users.css">
     <link rel="stylesheet" href="../assets/css/global_css/global.css">
 </head>
 <body> 
@@ -57,31 +57,10 @@ if(isset($_SESSION['logged_in'])){
     <main class="container-fluid">
         
         <div class="row p-5 ">
-            <div class="orders-side col-2  mx-0 px-0 py-4 rounded">
-                <nav class="order-navbar ">
-                    <h4 class="text-center">My Account</h4>
-                    <div class="d-flex justify-content-center w-100 ">
-                        <i class="order-users far fa-user-circle "></i>
-                       
-                    </div>
-                    <div class="custom-hr bg-secondary-subtle col-10 mx-auto"> </div>
-                    <ul class=" ">
-                        <li class="">
-                            <a href="">Dashboard</a>
-                        </li>
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Orders</a></li>
-                        <li><a href="">Carts</a></li>
-                        <li><a href="">Watch List</a></li>
-                        <li><a href="">Saved</a></li>
-                        <li><a href="">Settings</a></li>
-                        <li><a href="">Log out</a></li>
+            <!-- -navbar  -->
+            <?php include '../includes/user_account_navbar.php' ?>
 
-                    </ul>
-                </nav>
-
-            </div>
-            <div class="col-10 py-5 d-flex flex-column gap-5 ">
+            <div class="col-9 py-5 d-flex flex-column gap-5 ">
                 <div class="  mx-auto d-flex flex-column">
                     <h3 class="text-center">My Orders </h3>
                     <div class=" col-4 mx-auto custom-hr"></div>
