@@ -128,17 +128,17 @@ function CalculateTotalPrice(){
       <!-- Include product card -->
 <div class="container-fluid">
     <div class="row p-5">
-    <?php if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){ ?>
+   
 
          <!-- -navbar  -->
         <?php include '../includes/user_account_navbar.php' ?>
         <div class="col-9 py-5 d-flex flex-column gap-5 ">
             <div class="d-flex flex-column gap-2" >
-                <h3 class="text-center text-warning">My Profile </h3>
+                <h3 class="text-center text-warning">My Cart </h3>
                 <div class=" col-4 mx-auto custom-hr"></div>
 
             </div>
-
+            <?php if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){ ?>
             <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
                 <table class='table table-striped table-hover '>
                 <thead >
@@ -205,7 +205,7 @@ function CalculateTotalPrice(){
                 </div>
                 <?php }else{
                         echo "
-                        <div class='d-flex flex-column justify-content-center align-items-center p-5 shadow mb-5 vh-100'>
+                        <div class='d-flex flex-column justify-content-center align-items-center p-5 shadow mb-5 '>
                         <h2>There is no product in the cart.</h2>
                         <a href='index.php' class='text-warning '>Home Page</a>
                         </div>
