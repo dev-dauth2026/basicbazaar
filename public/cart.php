@@ -25,8 +25,7 @@ if (isset($_POST['add_to_cart'])){
             $_SESSION['cart'][$product_id] = $product_array;
 
         }else{
-           echo  "<script> alert('product has been already added')</script>";
-           header('location: product-details.php');
+           header('location: product-details.php?alert=Product has been already added to cart');
         }
 
     }else{
