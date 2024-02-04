@@ -83,9 +83,9 @@ if(isset($_SESSION['logged_in'])){
                                
                                 <div class="d-flex  flex-column justify-content-between gap-3 ">
                                     
-                                    <table class="table table-borderless table-responsive">
+                                    <table class="table table-hover table-borderless table-responsive">
                                         <thead>
-                                            <tr>
+                                            <tr class="border-bottom">
                                                 <td class="text-secondary text-center">Product</td>
                                                 <td class="text-secondary text-center">Quantity</td>
                                                 <td class="text-secondary text-center">Actions</td>
