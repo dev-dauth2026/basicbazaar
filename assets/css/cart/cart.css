@@ -1,9 +1,18 @@
-.image-article{
-    height: 50px;
-    width: 90px;
 
-}
-/* .cart-image{
-    height: 60px;
+.cart-image{
+    height: 150px;
     object-fit: cover;
-} */
+}
+.cart-button{
+    border: none;
+    padding:8px 10px ;
+    border-radius: 5px;
+    color: orange;
+    border:1px solid orange;
+    background-color: white;
+    transition: 1s all ease;
+}
+.cart-button:hover{
+    color: white;
+    background-color: rgb(240, 165, 25);
+}

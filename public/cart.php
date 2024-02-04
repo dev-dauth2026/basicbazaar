@@ -130,76 +130,82 @@ function CalculateTotalPrice(){
     <div class="row p-5">
    
 
-         <!-- -navbar  -->
-        <?php include '../includes/user_account_navbar.php' ?>
-        <div class="col-9 py-5 d-flex flex-column gap-5 ">
+        <?php if(isset($_SESSION['logged_in'])){?>
+             <!-- -navbar  -->
+             <?php include '../includes/user_account_navbar.php' ?>
+       <?php }?>
+        
+
+        
+        <div class="<?php echo isset($_SESSION['logged_in']) ?  'col-9': 'col-12 mx-auto'; ?> py-5 d-flex flex-column gap-5 ">
             <div class="d-flex flex-column gap-2" >
-                <h3 class="text-center text-warning">My Cart </h3>
+                <h3 class="text-center text-warning"><i class="fas fa-shopping-cart fs-3 me-3"></i> My Cart </h3>
                 <div class=" col-4 mx-auto custom-hr"></div>
 
             </div>
             <?php if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){ ?>
             <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
-                <table class='table table-striped table-hover '>
-                <thead >
-                    <tr >
-                        <th colspan="2" class="bg-warning text-light text-center">Product</th>
+                <table class='table table-borderless table-hover '>
+                    <thead >
+                        <tr class="border-bottom">
+                            <th colspan="2" class=" text-secondary ">Product</th>
 
-                        <th class="bg-warning text-light"> Product Quantity</th>
-                        <th class="bg-warning text-light">Product Price</th>
-                    </tr>
-                </thead>
-                
-                <tbody class="table-group-divider">
-                    
-                <?php foreach($_SESSION['cart'] as $key => $value){?>
-                        <tr >
-                            <td>
-                                <div class="d-flex ">
-                                    <div class="image-article d-flex justify-content-center">
-                                        <img class="cart-image " src="../admin/product_images/<?php echo $value['product_image'] ?>" alt="<?php echo $value['product_name'] ?>" >
-                                    </div>   
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column ms-3 ">
-                                        <p class="mb-0"><?php echo $value['product_name'] ?> </p>
-                                        <p class="mb-0">$<?php echo $value['product_price'] ?> </p>
-                                        <form method="post" action="cart.php">
-                                            <input type="hidden" name="product_id" value="<?php echo $value['product_id'] ?>">
-                                            <input class="text-danger mt-0 fs-6 border border-0 bg-transparent" name="remove_product" type="submit" value="Remove" />
-                                        </form>
-                                        
-                                    </div>
-                            </td>
-                            <td >
-                                <form method="post" action="cart.php" >
-
-                                    <input class="" type="hidden" name="product_id" value ="<?php echo $value['product_id'] ?>" />
-                                    <input class="col-1 text-center" type="number" min="0" name="product_quantity" value ="<?php echo $value['product_quantity'] ?>" />
-                                    <input class="bg-transparent border border-0 text-info" type="submit" name="edit_quantity" value ="Edit" />
-                                </form>
-
-                                
-                            </td>
-                            <td>$ <?php echo $value['product_quantity'] * $value['product_price']  ?></td>
+                            <th class=" text-secondary"> Product Quantity</th>
+                            <th class=" text-secondary">Product Price</th>
                         </tr>
-                    
-                    <?php 
+                    </thead>
                 
-                
-                }?>
+                    <tbody class="table-group-divider">
+                        
+                    <?php foreach($_SESSION['cart'] as $key => $value){?>
+                            <tr class="border-bottom ">
+                                <td>
+                                    <div class="d-flex ">
+                                        <div class="image-article d-flex justify-content-center">
+                                            <img class="cart-image " src="../admin/product_images/<?php echo $value['product_image'] ?>" alt="<?php echo $value['product_name'] ?>" >
+                                        </div>   
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column ms-3 ">
+                                            <p class="mb-0"><?php echo $value['product_name'] ?> </p>
+                                            <p class="mb-0">$<?php echo $value['product_price'] ?> </p>
+                                            <form method="post" action="cart.php">
+                                                <input type="hidden" name="product_id" value="<?php echo $value['product_id'] ?>">
+                                                <input class="text-danger mt-0 fs-6 border border-0 bg-transparent" name="remove_product" type="submit" value="Remove" />
+                                            </form>
+                                            
+                                        </div>
+                                </td>
+                                <td >
+                                    <form method="post" action="cart.php" >
+
+                                        <input class="" type="hidden" name="product_id" value ="<?php echo $value['product_id'] ?>" />
+                                        <input class="col-2 text-center" type="number" min="0" name="product_quantity" value ="<?php echo $value['product_quantity'] ?>" />
+                                        <input class="bg-transparent border border-0 text-info" type="submit" name="edit_quantity" value ="Edit" />
+                                    </form>
+
+                                    
+                                </td>
+                                <td>$ <?php echo $value['product_quantity'] * $value['product_price']  ?></td>
+                            </tr>
+                        
+                        <?php 
                     
                     
-                    <tr>
-                        <th colspan="3" class='text-end'>Total</th>
-                        <th>$ <?php echo $_SESSION['totalPrice']  ?></th>
-                    </tr>
-                </tbody>
+                    }?>
+                    
+                        <tr>
+                    
+
+                            <th colspan="3" class='text-end'>Total</th>
+                            <th>$ <?php echo $_SESSION['totalPrice']  ?></th>
+                        </tr>
+                    </tbody>
                 </table>
                 <div class="col-12 d-flex justify-content-end">
                     <form method="post" action="checkout.php">
-                        <input type="submit" name="checkout" class ="btn btn-warning" value="Checkout">
+                        <input type="submit" name="checkout" class ="cart-button" value="Proceed To Checkout">
                     </form>
                     
                 </div>
