@@ -1,0 +1,7 @@
+.carousel-custom-bg{
+    background: linear-gradient(333deg, rgba(230,223,192,1) 26%, rgba(218,172,73,1) 100%);
+}
+.carousel-inner img{
+    height: 400px;
+    object-fit: contain;
+}

@@ -45,7 +45,6 @@
 
     <!-- Your Custom CSS (if any) -->
     <link rel="stylesheet" href="../assets/css/product_css/product.css">
-    <link rel="stylesheet" href="../assets/css/index/index.css">
     <link rel="stylesheet" href="../assets/css/global_css/global.css">
 </head>
 <body> 
@@ -57,8 +56,6 @@
      <!-- Include category Navbar -->
      <?php include '../includes/category_navbar.php'; ?>
 
-     <!-- include carousel  -->
-     <?php include '../includes/carousel.php'; ?>
     
       <!-- Include product card -->
       <?php include '../includes/product_card.php'; ?>
