@@ -75,54 +75,77 @@ if(isset($_SESSION['logged_in'])){
 
                     <section class="col-10 mx-auto  py-4 d-flex flex-column gap-3">
                         <?php if($order_details) { ?>
-                        <table class="table table-borderless table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="bg-warning">Product Image</th>
-                                    <th class="bg-warning">Order Id</th>
-                                    <th class="bg-warning">Product Name</th>
-                                    <th class="bg-warning">Product Price</th>
-                                    <th class="bg-warning">Product Quantity</th>
-                                    <th class="bg-warning ">Action</th>
-                                </tr>
-                                
-                            </thead>
-                            <body>
-                                <?php while ($row= $order_details->fetch_assoc()) { ?>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex justify-content-center ">
-                                                <div class="image-article d-flex justify-content-center">
-                                                    <img class="order-images" src="../admin/product_images/<?php echo $row['product_image'] ?>" alt="<?php echo $row['product_name'] ?>">
-                                            </div>   
-                                        </div>
-                                    </td>
-                                    <td><?php echo $row['order_id'] ?> </td>
-                                    <td><?php echo $row['product_name'] ?> </td>
-                                    <td>$<?php echo $row['product_price'] ?> </td>
-                                    <td><?php echo $row['product_quantity'] ?> </td>
-                                    <td class="">
-                                        <div class="d-flex gap-2 ">
-                                            <!-- <form action="product-details.php" method="GET">
-                                                <input type="hidden" name="product_details" value="<?php echo $row['product_id'] ?>">
-                                                <input type="hidden" name="order_id" value="<?php echo $row['order_id'] ?>">
-                                                <button title="view order details" class="border border-0 bg-transparent" name="product_details" type="submit"><i class="far fa-eye"></i></button>
-                                            </form> -->
-                                            <a href="product-details.php?product_details=<?php echo $row['product_id'] ?>" title="view order details" class="text-secondary border border-0 bg-transparent" name="product_details" ><i class="far fa-eye"></i></a>
-                                            <form action="" method="GET">
-                                                    <button title="cancel the order" class="border border-0 bg-transparent" name="cancel_order" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                            </form>
-                                        </div>
+                        <div class="d-flex flex-column gap-3 border p-2 rounded  ">
+                                 
+                                    <div class="bg-secondary-subtle p-2">
+                                        <div>Order Id: <?php echo $_GET['order_id'] ?> </div>
+                                    </div>
+                               
+                                <div class="d-flex  flex-column justify-content-between gap-3 ">
+                                    
+                                    <table class="table table-borderless table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <td class="text-secondary text-center">Product</td>
+                                                <td class="text-secondary text-center">Quantity</td>
+                                                <td class="text-secondary text-center">Actions</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php while ($row= $order_details->fetch_assoc()) { ?>
+                                            <tr class="col-12">
+                                                <td class="col-12 d-flex py-4 ">
+                                                    <div class="image-article d-flex justify-content-center">
+                                                        <img class="order-images" src="../admin/product_images/<?php echo $row['product_image'] ?>" alt="<?php echo $row['product_name'] ?>">
+                                                    </div> 
+                                                    <div class="d-flex flex-column gap-2">
+                                                        <div><?php echo $row['product_name'] ?> </div>
+                                                        <div>$<?php echo $row['product_price'] ?> </div>
+                                                    </div>
+                                                    
+                                                    
+                                                
+                                                </td>
+                                           
+                                                <td class="py-4 col-3  text-center"><?php echo $row['product_quantity'] ?> </td>
+                                          
+
+                                                <td class="py-4 col-3 ">
+                                                    <div class="d-flex gap-2 justify-content-center">
+
+                                                    <!-- <form action="product-details.php" method="GET">
+                                                        <input type="hidden" name="product_details" value="<?php echo $row['product_id'] ?>">
+                                                        <input type="hidden" name="order_id" value="<?php echo $row['order_id'] ?>">
+                                                        <button title="view order details" class="border border-0 bg-transparent" name="product_details" type="submit"><i class="far fa-eye"></i></button>
+                                                    </form> -->
+                                                        <a href="product-details.php?product_details=<?php echo $row['product_id'] ?>" title="view order details" class="text-secondary border border-0 bg-transparent" name="product_details" ><i class="far fa-eye"></i></a>
+                                                        <form action="" method="GET">
+                                                                <button title="cancel the order" class="border border-0 bg-transparent" name="cancel_order" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                        
+                                       
+
                                         
                                         
-                                    </td>
+                                        
+                                        
+                                       
+
+                                    </table>
+                                   
 
 
-                                </tr>
-                                <?php } ?>
-                            </body>
+                                </div>
+                               
+                            
 
-                        </table>
+                        </div>
                         <?php } ?> 
                     </section>
                 </div>
