@@ -31,3 +31,13 @@ button:hover{
     color:#ffc107;
     background-color: #ffc107; 
 }
+
+input[type='radio']{
+    accent-color: #ffc107;
+
+}
+
+input:focus{
+    border:1px solid #ffc107;
+    
+}

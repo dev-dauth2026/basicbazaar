@@ -127,29 +127,29 @@ if(isset($_GET["category_id"])){
                                     <input name='detail_product_image' type='hidden' value='<?php echo $row['product_img1']?>'>
                                
                                      <!--  radio button list -->
-                                    <div class='radio-button d-flex mb-3 gap-3'>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='color' id='Red' value='Red' checked>
+                                    <div class='custom-radio d-flex mb-3 gap-3'>
+                                        <div class=''>
+                                            <input class=' ' type='radio' name='color' id='Red' value='Red' checked>
                                             <label class='form-check-label' for='Red'>
                                                 Red
                                             </label>
                                         </div>
                                         <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='color' id='Blue' value='Blue'>
+                                            <input class='' type='radio' name='color' id='Blue' value='Blue'>
                                             <label class='form-check-label' for='Blue'>
                                                 Blue
                                             </label>
                                         </div>
                                         
                                         <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='color' id='White' value='White'>
+                                            <input class='' type='radio' name='color' id='White' value='White'>
                                             <label class='form-check-label' for='White'>
                                                 White
                                             </label>
                                         </div>
                                         
                                         <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='color' id='Gray' value='Gray'>
+                                            <input class='' type='radio' name='color' id='Gray' value='Gray'>
                                             <label class='form-check-label' for='Gray'>
                                                 Gray
                                             </label>
@@ -163,7 +163,7 @@ if(isset($_GET["category_id"])){
                                     
                                     <div class ='col-6 d-flex align-items-center'>
                                         <lable id='sizes' class='text-nowrap me-3'>Select Sizes:</lable>
-                                        <select for='sizes' class='form-select' name='selected_size' aria-label='select_size'>
+                                        <select for='sizes' class='form-select focus-warning rounded' name='selected_size' aria-label='select_size'>
                                             <option selected>Select Size</option>
                                             <option value='XL' >XL</option>
                                             <option value='XL'>L</option>
@@ -180,13 +180,13 @@ if(isset($_GET["category_id"])){
                                     
                                     <div class ='col-6 d-flex align-items-center gap-2'>
                                         <lable class='text-nowrap me-3'>Select Quantity:</lable>
-                                        <input type='number' value='1' class='col-2 text-center p-1' name='product_quantity' >
+                                        <input type='number' value='1' class='col-2 border rounded text-center p-1' name='product_quantity' >
                                     </div>
 
                                     <!--  select quantity ends -->
                                     
                                     <br>
-                                    <input type='submit' name='add_to_cart' class='btn btn-primary' value = 'Add To Cart'>
+                                    <input type='submit' name='add_to_cart' class='btn btn-warning' value = 'Add To Cart'>
                                 </form>
 
                             </div>
