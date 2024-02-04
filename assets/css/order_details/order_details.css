@@ -1,10 +1,4 @@
-
-.image-article{
-    height: 50px;
-    width: 90px;
-
-}
-.image-article .order-images{
-    height: 70px;     
-    object-fit: contain;
+ .order-images{
+    height: 150px;     
+    object-fit: cover;
 }

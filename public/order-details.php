@@ -25,11 +25,17 @@ if(isset($_SESSION['logged_in'])){
         $order_id = $_GET['order_id'];
 
 
-        $stmt = $conn->prepare('SELECT * FROM order_items WHERE user_id=? && order_id=? ');
+        $stmt = $conn->prepare('SELECT * FROM order_items WHERE user_id=? AND order_id=? ');
         $stmt->bind_param('ii', $user_id,$order_id);
         $stmt->execute();
     
         $order_details = $stmt->get_result();
+
+        $stmt2 =$conn ->prepare('SELECT * FROM orders WHERE user_id= ? AND order_id=?');
+        $stmt2->bind_param('ii', $user_id, $order_id);
+        $stmt2->execute();
+
+        $orders = $stmt2->get_result();
     }
     
 }   
@@ -77,8 +83,11 @@ if(isset($_SESSION['logged_in'])){
                         <?php if($order_details) { ?>
                         <div class="d-flex flex-column gap-3 border p-2 rounded  ">
                                  
-                                    <div class="bg-secondary-subtle p-2">
+                                    <div class="d-flex justify-content-between bg-secondary-subtle p-2 px-3">
                                         <div>Order Id: <?php echo $_GET['order_id'] ?> </div>
+                                        <?php while ($ord = $orders->fetch_assoc()) { ?>
+                                        <div><strong>Total: $<?php echo $ord['order_cost'] ?></strong></div>
+                                        <?php } ?>
                                     </div>
                                
                                 <div class="d-flex  flex-column justify-content-between gap-3 ">
@@ -86,7 +95,7 @@ if(isset($_SESSION['logged_in'])){
                                     <table class="table table-hover table-borderless table-responsive">
                                         <thead>
                                             <tr class="border-bottom">
-                                                <td class="text-secondary text-center">Product</td>
+                                                <td colspan="2" class="text-secondary text-center">Product</td>
                                                 <td class="text-secondary text-center">Quantity</td>
                                                 <td class="text-secondary text-center">Actions</td>
                                             </tr>
@@ -94,10 +103,13 @@ if(isset($_SESSION['logged_in'])){
                                         <tbody>
                                         <?php while ($row= $order_details->fetch_assoc()) { ?>
                                             <tr class="col-12">
-                                                <td class="col-12 d-flex py-4 ">
+                                                <td>
                                                     <div class="image-article d-flex justify-content-center">
                                                         <img class="order-images" src="../admin/product_images/<?php echo $row['product_image'] ?>" alt="<?php echo $row['product_name'] ?>">
                                                     </div> 
+                                                </td>
+                                                <td class="py-4 ">
+                                                    
                                                     <div class="d-flex flex-column gap-2">
                                                         <div><?php echo $row['product_name'] ?> </div>
                                                         <div>$<?php echo $row['product_price'] ?> </div>
@@ -128,14 +140,6 @@ if(isset($_SESSION['logged_in'])){
                                             </tr>
                                             <?php } ?>
                                         </tbody>
-                                        
-                                       
-
-                                        
-                                        
-                                        
-                                        
-                                       
 
                                     </table>
                                    
