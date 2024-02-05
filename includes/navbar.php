@@ -36,7 +36,7 @@
                 
                     <div class="d-flex align-middle list-unstyled gap-4 ">
                         <li  class="nav-item   h-100">
-                            <a class="nav-link text-light" href="index.php">Product</a>
+                            <a class="nav-link text-light" href="products.php">Product</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="cart.php"><i class="fas fa-shopping-cart fs-4"></i></a>
