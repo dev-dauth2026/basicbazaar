@@ -12,7 +12,7 @@
 
                         echo "
                         <li class='nav-item'>
-                         <a class='nav-link' href='index.php?category_id=$category_id'>$category_name</a>
+                         <a class='nav-link' href='products.php?category_id=$category_id'>$category_name</a>
                          </li>";
                         
 
