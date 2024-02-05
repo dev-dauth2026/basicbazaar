@@ -32,7 +32,7 @@ button:hover{
     background-color: #ffc107; 
 }
 
-input[type='radio']{
+input[type='radio'], input[type='checkbox']{
     accent-color: #ffc107;
 
 }
