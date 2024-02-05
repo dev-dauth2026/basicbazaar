@@ -31,7 +31,8 @@
     
  }
 
- $products = $results;
+ $watched_products = $results;
+ $products = $conn->query("SELECT * from `products`");
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,14 +61,14 @@
      <!-- include carousel  -->
      <?php include '../includes/carousel.php'; ?>
     
-      <!-- Include product card -->
-      <?php include '../includes/product_card.php'; ?>
+      <!-- Include index categories card -->
+      <?php include '../includes/index_categories.php'; ?>
 
-      <!-- include pagination -->
+      <!-- Include watched product card -->
+      <?php include '../includes/watched_product.php'; ?>
 
-      <?php include '../includes/product_pagination.php'; ?>
-
-     
+       <!-- Include recommendation product -->
+       <?php include '../includes/index_recommendation_product.php'; ?>   
 
     <!-- Include Navbar -->
      <?php include '../includes/footer.php'; ?>
@@ -78,6 +79,19 @@
 
     <!-- Your Custom Scripts (if any) -->
     <script src="js/script.js"></script>
+    <script>
+
+    function Prev(){
+        const parentCostumeSlider = document.getElementById("custome-carousel-item");
+
+        parentCostumeSlider.insertBefore(parentCostumeSlider.children[parentCostumeSlider.children.length -1 ], parentCostumeSlider.children[0]);
+    }
+    function Next(){
+        const parentCostumeSlider = document.getElementById("custome-carousel-item");
+        parentCostumeSlider.appendChild(parentCostumeSlider.children[0])
+
+    }
+    </script>
     
 </body>
 </html>

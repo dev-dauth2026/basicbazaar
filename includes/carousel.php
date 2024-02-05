@@ -1,4 +1,4 @@
-<div id="carouselExampleRide" class="carousel slide carousel-custom-bg" data-bs-ride="true">
+<div id="carouselExampleRide" class="carousel slide carousel-custom-bg mb-5" data-bs-ride="true">
   <div class="carousel-inner">
     <div class="carousel-item active ">
        
