@@ -18,7 +18,7 @@
                         aria-label="Search" 
                         value="<?php echo isset($_GET['search_input']) ? htmlspecialchars($_GET['search_input']) : ''; ?>" 
                         required>
-                    <button class="bg-primary-subtle p-2 px-2 border border-0 rounded-end" type="submit">Search</button>
+                    <button class=" p-2 px-2 border border-0 rounded-end bg-warning" type="submit">Search</button>
                 </form>
 
             </div>
