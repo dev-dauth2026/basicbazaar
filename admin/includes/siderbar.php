@@ -34,6 +34,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-light" href="add-color.php">
+                            <i class="fas fa-palette"></i> Add Color
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-light" href="../public/index.php">
                                 <i class="fas fa-user-circle"></i> Total Sales
                             </a>
