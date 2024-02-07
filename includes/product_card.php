@@ -1,7 +1,10 @@
 
 <div class="container-fluid py-4 ">
-        <div class=" row  ">
+        <div class=" row filters ">
             <div class="col-lg-2 col-md-2 col-sm-3 col-4 d-flex flex-column gap-5">
+                <form method="GET" action="products.php" class="d-flex flex-column gap-5">
+                
+                <input type="submit" value="Filter" class="btn btn-warning float-end">
                 <!-- selected filter  -->
                 <div>
                     <h6>Selected Filter</h6>
@@ -12,204 +15,158 @@
                     </div>
                  </div>
 
-            <!-- category filter  -->
-             <div class=" d-flex flex-column">
-                <h6>Categories</h6>
-                <hr class="custom-hr ">
-                <div class="d-flex flex-column">
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="shirt">
-                        <label for="shirt">Shirt</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pant">
-                        <label for="pant">Pant</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="shoe">
-                        <label for="shoe">Shoes</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="coat">
-                        <label for="coat">Coat</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="underwear">
-                        <label for="underwear">Underwear</label>
-                    </div>
-                    
 
+                <!-- color filter  -->
+                <div class=" d-flex flex-column">
+                    <h6>Colors</h6>
+                    <hr class="custom-hr ">
+                    <div class="d-flex flex-column">
+                        <?php foreach ($color_array as $color){?>
+                            <div class="d-flex gap-3">
+                            <input type="checkbox" name="color[]" value="<?php echo $color; ?>"  >
+                            <label for="<?php echo $color; ?>" class="text-capitalize"><?php echo $color; ?></label>
+                        </div>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
 
-            <!-- color filter  -->
-             <div class=" d-flex flex-column">
-                <h6>Colors</h6>
-                <hr class="custom-hr ">
-                <div class="d-flex flex-column">
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="red">
-                        <label for="red">Red</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="blue">
-                        <label for="blue">Blue</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="orange">
-                        <label for="orange">Orange</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="green">
-                        <label for="green">Green</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="yellow">
-                        <label for="yellow">Yellow</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="white">
-                        <label for="white">White</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pink">
-                        <label for="pink">Pink</label>
-                    </div>
+                <!-- brand filter  -->
+                <div class=" d-flex flex-column">
+                    <h6>Brands</h6>
+                    <hr class="custom-hr ">
+                
+                    <div class="d-flex flex-column">
                     
+                            <?php foreach ($brand_array as $brand):?>
+                               
+                            <div class="d-flex gap-3">
+                                <input 
+                                type="checkbox" 
+                                name="brand[]" 
+                                value="<?php echo $brand['brand_id']; ?>" 
+                                <?php if(isset($_GET['brand'])) { ?>
+                                    <?php foreach ($_GET['brand'] as $filtered_brand_id){ 
+                                        if($filtered_brand_id == $brand['brand_id']){
+                                            echo 'checked';
+                                        }
 
+                                     } ?>
+
+                                <?php } ?>
+                                
+                                >
+                                
+                                <label for="brand[]" class="text-capitalize"><?php echo $brand['brand_name']; ?></label>
+                            </div>
+                         
+                            <?php endforeach; ?>
+                           
+                            
+                    </div>
+                   
                 </div>
-            </div>
 
-            <!-- brand filter  -->
-            <div class=" d-flex flex-column">
-                <h6>Brands</h6>
-                <hr class="custom-hr ">
-                <div class="d-flex flex-column">
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="adidas">
-                        <label for="adidas">Adidas</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="nike">
-                        <label for="nike">Nike</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="fila">
-                        <label for="fila">FILA</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="northface">
-                        <label for="northface">The North Face</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="skecher">
-                        <label for="skecher">Skecher</label>
-                    </div>
-                    
+                <!-- price filter  -->
+                <!-- <div class=" d-flex flex-column">
+                    <h6>Price</h6>
+                    <hr class="custom-hr ">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="pricerange1">
+                            <label for="pricerange1">Up to $25</label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="pricerange2">
+                            <label for="pricerange2">$25 to $50</label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="pricerange3">
+                            <label for="pricerange3">$50 to $100</label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="pricerange4">
+                            <label for="pricerange4">$100 to $200</label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="pricerange5">
+                            <label for="pricerange5">$200 & above</label>
+                        </div>
+                        
 
-                </div>
-            </div>
+                    </div>
+                </div> -->
 
-            <!-- price filter  -->
-            <div class=" d-flex flex-column">
-                <h6>Price</h6>
-                <hr class="custom-hr ">
-                <div class="d-flex flex-column">
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pricerange1">
-                        <label for="pricerange1">Up to $25</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pricerange2">
-                        <label for="pricerange2">$25 to $50</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pricerange3">
-                        <label for="pricerange3">$50 to $100</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pricerange4">
-                        <label for="pricerange4">$100 to $200</label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="pricerange5">
-                        <label for="pricerange5">$200 & above</label>
-                    </div>
-                    
+                <!-- customer review filter  -->
+                <!-- <div class=" d-flex flex-column">
+                    <h6>Customer Review</h6>
+                    <hr class="custom-hr ">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="star5">
+                            <label for="star5">
+                                <div class='rating'>
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                </div>
+                            </label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="star4">
+                            <label for="star4">
+                                <div class='rating'>
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                </div>
+                            </label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="star3">
+                            <label for="star3">
+                                <div class='rating'>
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                </div>
+                            </label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="star2">
+                            <label for="star2">
+                                <div class='rating'>
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                </div>
+                            </label>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="star2">
+                            <label for="star2">
+                                <div class='rating'>
+                                        <span class='fas fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                        <span class='far fa-star text-warning'></span> 
+                                </div>
+                            </label>
+                        </div>
+                        
+                        
 
-                </div>
-            </div>
-
-            <!-- customer review filter  -->
-            <div class=" d-flex flex-column">
-                <h6>Customer Review</h6>
-                <hr class="custom-hr ">
-                <div class="d-flex flex-column">
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="star5">
-                        <label for="star5">
-                             <div class='rating'>
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                             </div>
-                        </label>
                     </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="star4">
-                        <label for="star4">
-                             <div class='rating'>
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                             </div>
-                        </label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="star3">
-                        <label for="star3">
-                            <div class='rating'>
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                             </div>
-                        </label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="star2">
-                        <label for="star2">
-                             <div class='rating'>
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                             </div>
-                        </label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <input type="checkbox" name="star2">
-                        <label for="star2">
-                            <div class='rating'>
-                                    <span class='fas fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                                    <span class='far fa-star text-warning'></span> 
-                             </div>
-                        </label>
-                    </div>
-                    
-                    
-
-                </div>
-            </div>
+                </div> -->
+            </form>
             </div>
 
             <div class="col-lg-10 col-md-10 col-sm-8 col-8 ">
