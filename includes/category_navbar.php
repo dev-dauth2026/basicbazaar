@@ -1,28 +1,17 @@
+<?php 
+$all_categories =$conn->query( "select * from `category`");
+?>
 <nav class="navbar bg-secondary px-3 text-white" style="height: 40px;">
         <div class="container-fuild h-100">
             <ul class=" d-flex gap-5 align-items-center h-100">
             <li  class="nav-item   h-100">
                             <a class="nav-link text-light" href="products.php">All</a>
                         </li>
-                <?php
-
-                $all_categories = "select * from `category`";
-                $result_category = mysqli_query($conn, $all_categories) or die(mysqli_error($conn));
-                
-                    while($row_category = mysqli_fetch_array($result_category)){
-                        $category_id = $row_category["category_id"];
-                        $category_name = $row_category["category_name"];
-
-                        echo "
+                <?php  while($row_category = $all_categories->fetch_assoc()){ ?>
                         <li class='nav-item'>
-                         <a class='nav-link' href='products.php?category_id=$category_id'>$category_name</a>
-                         </li>";
-                        
-
-                    };
-              
-
-                ?>
+                         <a class='nav-link' href='products.php?category_id=<?php echo $row_category['category_id']; ?>'><?php echo $row_category['category_name']; ?></a>
+                         </li>
+                  <?php } ?>      
 
             </ul>
         </div>
