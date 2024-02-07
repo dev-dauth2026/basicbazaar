@@ -5,7 +5,7 @@
  session_start();
  include '../includes/config.php';
 
- $color_array = array("blue","gray","green","orange","pink","purple","red","white","yellow");
+ $color_array = $conn->query("SELECT * FROM color");
  $brand_array = $conn->query("SELECT * FROM brand");
  
  $categories_result = $conn->query("SELECT * FROM category");
@@ -32,18 +32,23 @@
     $results = $conn->query($search_query);
 
  }elseif((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) || (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color']))) {
-        $filtered_brand_array = $_GET['brand'];
-        $filtered_color_array = $_GET['color'];
-        $brand_placeholders = implode(', ', array_fill(0, count($filtered_brand_array), '?'));
-        $color_placeholders = implode(', ', array_fill(0, count($filtered_brand_array), '?'));
+        if(isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])){
+            $filtered_brand_array = $_GET['brand'];
+            $brand_placeholders = implode(', ', array_fill(0, count($filtered_brand_array), '?'));
+        }
+        if(isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])){
+            $filtered_color_array = $_GET['color'];
+            $color_placeholders = implode(', ', array_fill(0, count($filtered_color_array), '?'));
+        }
 
     if ((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) && (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color']))){
         $brand_color_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders) AND color_id IN ($color_placeholders)");
     
         $types = str_repeat('i', count($filtered_brand_array)+count($filtered_color_array));
-        $brand_color_stmt->bind_param($types, ...$filtered_brand_array);
+        $brand_color_stmt->bind_param($types, ...$filtered_brand_array,...$filtered_color_array);
         $brand_color_stmt->execute();
         $results = $brand_color_stmt->get_result();
+
     }elseif (isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) {
         $brand_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders)");
     
@@ -51,8 +56,7 @@
         $brand_stmt->bind_param($types, ...$filtered_brand_array);
         $brand_stmt->execute();
         $results = $brand_stmt->get_result();
-        $brand_stmt = $conn->prepare('');
-        $results = $brand_stmt->get_result();
+
     }elseif(isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])) {
         $color_stmt = $conn->prepare("SELECT * FROM products WHERE color_id IN ($color_placeholders)");
     
@@ -60,8 +64,7 @@
         $color_stmt->bind_param($types, ...$filtered_color_array);
         $color_stmt->execute();
         $results = $color_stmt->get_result();
-        $color_stmt = $conn->prepare('');
-        $results = $color_stmt->get_result();
+
     }
 
     

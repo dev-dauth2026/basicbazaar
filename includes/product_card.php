@@ -10,8 +10,38 @@
                     <h6>Selected Filter</h6>
                     <hr class="custom-hr ">
                     <div class="d-flex flex-column gap-2">
-                        <span class="bg-success-subtle text-success px-3 py-1 rounded ">Shoes X</span>
-                        <span class="bg-success-subtle text-success px-3 py-1 rounded ">4 Star and Up X</span>
+                        <?php if(isset($_GET['color'])){ ?>
+                            <p>Color :</p>
+                            <?php foreach($_GET['color'] as $filtered_color){ ?>
+                                <span class="bg-success-subtle text-success px-3 py-1 rounded ">
+                                <?php if($color_array->num_rows>0){ ?>
+                                     <?php foreach ($color_array as $color){?>
+                                        <?php if($filtered_color == $color['color_id']){ ?>
+                                                     <?php echo $color['color_name'] ?>
+                                            <?php } ?>
+                                    <?php }?>
+                                 <?php }?>
+                                </span>
+                            <?php } ?>
+
+                        <?php } ?>
+                        <br>
+                       
+                        <?php if(isset($_GET['brand'])){ ?>
+                            <p>Brand :</p>
+                            <?php foreach($_GET['brand'] as $filtered_brand){ ?>
+                                <span class="bg-success-subtle text-success px-3 py-1 rounded ">
+                                <?php if($brand_array->num_rows>0){ ?>
+                                     <?php foreach ($brand_array as $brand){?>
+                                        <?php if($filtered_brand == $brand['brand_id']){ ?>
+                                                     <?php echo $brand['brand_name'] ?>
+                                            <?php } ?>
+                                    <?php }?>
+                                 <?php }?>
+                                </span>
+                            <?php } ?>
+
+                        <?php } ?>
                     </div>
                  </div>
 
@@ -21,12 +51,24 @@
                     <h6>Colors</h6>
                     <hr class="custom-hr ">
                     <div class="d-flex flex-column">
+                        <?php if($color_array->num_rows>0){ ?>
                         <?php foreach ($color_array as $color){?>
                             <div class="d-flex gap-3">
-                            <input type="checkbox" name="color[]" value="<?php echo $color; ?>"  >
-                            <label for="<?php echo $color; ?>" class="text-capitalize"><?php echo $color; ?></label>
+                            <input type="checkbox" name="color[]" value="<?php echo $color['color_id']; ?>"  
+                            <?php if(isset($_GET['color'])) { ?>
+                                    <?php foreach ($_GET['color'] as $filtered_color_id){ 
+                                        if($filtered_color_id == $color['color_id']){
+                                            echo 'checked';
+                                        }
+
+                                     } ?>
+
+                                <?php } ?>
+                            >
+                            <label for="color[]" class="text-capitalize"><?php echo $color['color_name']; ?></label>
                         </div>
                         <?php } ?>
+                     <?php } ?>
                     </div>
                 </div>
 
