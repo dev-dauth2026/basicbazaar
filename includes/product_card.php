@@ -2,14 +2,19 @@
 <div class="container-fluid py-4 ">
         <div class=" row filters ">
             <div class="col-lg-2 col-md-2 col-sm-3 col-4 d-flex flex-column gap-5">
-                <form method="GET" action="products.php" class="d-flex flex-column gap-5">
+                <form method="GET" action="products.php" class="d-flex flex-column gap-3">
                 
                 <input type="submit" value="Filter" class="btn btn-warning float-end">
                 <!-- selected filter  -->
-                <div>
-                    <h6>Selected Filter</h6>
-                    <hr class="custom-hr ">
-                    <div class="d-flex flex-column gap-2">
+                <div class="border p-2 rounded">
+                    <div class="d-flex justify-content-between">
+                        <div><h6>Selected Filter</h6></div>
+                        <div><a href="products.php"><small class="text-danger">Clear</small></a></div>
+                    </div>
+                    
+                    <hr class="custom-hr m-0  mb-2">
+                    <?php if(isset($_GET['color'] )|| (isset($_GET['brand']))) { ?>
+                    <div class="d-flex flex-column gap-1">
                         <?php if(isset($_GET['color'])){ ?>
                             <p>Color :</p>
                             <?php foreach($_GET['color'] as $filtered_color){ ?>
@@ -43,13 +48,14 @@
 
                         <?php } ?>
                     </div>
-                 </div>
+                    <?php } ?>
+                </div>
 
 
                 <!-- color filter  -->
                 <div class=" d-flex flex-column">
                     <h6>Colors</h6>
-                    <hr class="custom-hr ">
+                    <hr class="custom-hr m-0 mb-2">
                     <div class="d-flex flex-column">
                         <?php if($color_array->num_rows>0){ ?>
                         <?php foreach ($color_array as $color){?>
@@ -75,7 +81,7 @@
                 <!-- brand filter  -->
                 <div class=" d-flex flex-column">
                     <h6>Brands</h6>
-                    <hr class="custom-hr ">
+                    <hr class="custom-hr m-0 mb-2">
                 
                     <div class="d-flex flex-column">
                     
