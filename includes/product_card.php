@@ -4,11 +4,14 @@
             <div class="col-lg-2 col-md-2 col-sm-3 col-4 d-flex flex-column gap-5">
                 <form method="GET" action="products.php" class="d-flex flex-column gap-3">
                 
+                
                 <input type="submit" value="Filter" class="btn btn-warning float-end">
                 <!-- selected filter  -->
                 <div class="border p-2 rounded">
+                    <h2 id="query"></h2>
                     <div class="d-flex justify-content-between">
                         <div><h6>Selected Filter</h6></div>
+                        
                         <div><a href="products.php"><small class="text-danger">Clear</small></a></div>
                     </div>
                     
@@ -18,15 +21,19 @@
                         <?php if(isset($_GET['color'])){ ?>
                             <p>Color :</p>
                             <?php foreach($_GET['color'] as $filtered_color){ ?>
-                                <span class="bg-success-subtle text-success px-3 py-1 rounded ">
+                                <div class="d-flex justify-content-between align-items-center bg-success-subtle text-success px-3 py-1 rounded ">
                                 <?php if($color_array->num_rows>0){ ?>
                                      <?php foreach ($color_array as $color){?>
                                         <?php if($filtered_color == $color['color_id']){ ?>
+                                                    <span>
                                                      <?php echo $color['color_name'] ?>
+                                                    </span>
+                                                    <i class="fas fa-times"></i>
+                                                     
                                             <?php } ?>
                                     <?php }?>
                                  <?php }?>
-                                </span>
+                                </div>
                             <?php } ?>
 
                         <?php } ?>
@@ -35,24 +42,33 @@
                         <?php if(isset($_GET['brand'])){ ?>
                             <p>Brand :</p>
                             <?php foreach($_GET['brand'] as $filtered_brand){ ?>
-                                <span class="bg-success-subtle text-success px-3 py-1 rounded ">
+                                <div class="d-flex justify-content-between align-items-center bg-success-subtle text-success px-3 py-1 rounded ">
                                 <?php if($brand_array->num_rows>0){ ?>
                                      <?php foreach ($brand_array as $brand){?>
                                         <?php if($filtered_brand == $brand['brand_id']){ ?>
-                                                     <?php echo $brand['brand_name'] ?>
+                                                    <span>
+                                                    <?php echo $brand['brand_name'] ?>
+                                                    </span>
+                                                    <button class="pe-auto text-success border-0 bg-transparent" onclick="UnSetParam('brand')"><i class="fas fa-times"></i></button>
+                                                    
                                             <?php } ?>
                                     <?php }?>
                                  <?php }?>
-                                </span>
+                                </div>
                             <?php } ?>
 
                         <?php } ?>
                         <?php if(isset($_GET['filter_price'])){ ?>
                             <p>Price :</p>
                        
-                                <span class="bg-success-subtle text-success px-3 py-1 rounded ">
-                                 <?php echo $_GET['filter_price'] ?>
-                                </span>
+                                <div class="d-flex justify-content-between align-items-center bg-success-subtle text-success px-3 py-1 rounded ">
+                                    <span>
+                                    upto $<?php echo $_GET['filter_price'] ?>
+                                    </span>
+                                    <button type="button" class="pe-auto text-success border-0 bg-transparent" onclick="UnSetParamPrice('filter_price')"><i class="fas fa-times"></i></button>
+                                   
+                                
+                                </div>
                       
 
                         <?php } ?>
@@ -126,7 +142,7 @@
                 <!-- price filter  -->
             <div class=" d-flex flex-column">
                     <h6>Price</h6>
-                    <hr class="custom-hr mb-0">
+                    <hr class="custom-hr m-0">
                     <div class="d-flex flex-column">
                         <div class="position-relative py-3 ">
             
@@ -257,7 +273,7 @@
                                         
                                 <?php }?> 
                                     
-                                <?php }else{ ?>
+                            <?php }else{ ?>
                                 
                                     <div class ='col-lg-10 mx-auto d-flex justify-content-center  p-5 m-5  '>
                                             <h3> Sorry, No product Available</h3>

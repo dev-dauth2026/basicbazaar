@@ -5,6 +5,18 @@
  session_start();
  include '../includes/config.php';
 
+
+$current_url =  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+$urlParts = parse_url($current_url, PHP_URL_QUERY);
+
+if ($urlParts) {
+    parse_str($urlParts, $queryParams);
+    
+    
+}
+
+
  $color_array = $conn->query("SELECT * FROM color");
  $brand_array = $conn->query("SELECT * FROM brand");
  
@@ -170,8 +182,7 @@ else{
     <!-- Bootstrap JS (optional, but may be needed for some components) -->
     <?php include '../admin/includes/js_cdn.php'; ?>
 
-    <!-- Your Custom Scripts (if any) -->
-    <script src="js/script.js"></script>
+
 
    <script>
     const rangeInput = document.getElementById('rangeInput');
@@ -197,6 +208,24 @@ else{
     // Add event listeners for input and mousemove events to update the display
     rangeInput.addEventListener('input', updateDisplay);
     rangeInput.addEventListener('mousemove', updateDisplay);
+
+    function UnSetParam(paramName) {
+        // Remove the parameter from the URL
+        var currentUrl = decodeURIComponent(window.location.href);
+        console.log(decodeURIComponent(window.location.href))
+
+        var url = new URL(currentUrl);
+        url.searchParams.delete(paramName);
+
+        // Redirect to the modified URL
+        window.location.href = url.toString();
+        
+        // // Update the DOM element to reflect the parameter removal
+      
+
+      
+    }
+
   </script>
     
 </body>
