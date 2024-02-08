@@ -127,30 +127,6 @@
             <div class=" d-flex flex-column">
                     <h6>Price</h6>
                     <hr class="custom-hr mb-0">
-                    <!-- <div class="d-flex flex-column">
-                        <div class="d-flex gap-3">
-                            <input type="checkbox" name="pricerange1">
-                            <label for="pricerange1">Up to $25</label>
-                        </div>
-                        <div class="d-flex gap-3">
-                            <input type="checkbox" name="pricerange2">
-                            <label for="pricerange2">$25 to $50</label>
-                        </div>
-                        <div class="d-flex gap-3">
-                            <input type="checkbox" name="pricerange3">
-                            <label for="pricerange3">$50 to $100</label>
-                        </div>
-                        <div class="d-flex gap-3">
-                            <input type="checkbox" name="pricerange4">
-                            <label for="pricerange4">$100 to $200</label>
-                        </div>
-                        <div class="d-flex gap-3">
-                            <input type="checkbox" name="pricerange5">
-                            <label for="pricerange5">$200 & above</label>
-                        </div>
-                        
-
-                    </div> -->
                     <div class="d-flex flex-column">
                         <div class="position-relative py-3 ">
             

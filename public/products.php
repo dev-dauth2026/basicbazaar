@@ -31,7 +31,8 @@
     
     $results = $conn->query($search_query);
 
- }elseif((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) || (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color']))) {
+ }
+ elseif((isset($_GET['brand'])) || (isset($_GET['color'])) || (isset($_GET['filter_price']))) {
         if(isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])){
             $filtered_brand_array = $_GET['brand'];
             $brand_placeholders = implode(', ', array_fill(0, count($filtered_brand_array), '?'));
@@ -40,16 +41,61 @@
             $filtered_color_array = $_GET['color'];
             $color_placeholders = implode(', ', array_fill(0, count($filtered_color_array), '?'));
         }
-
-    if ((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) && (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color']))){
-        $brand_color_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders) AND color_id IN ($color_placeholders)");
+        if(isset($_GET['filter_price']) ){
+            $filtered_price = (int)$_GET['filter_price'];
+        }
+// if filters have all 3 filter (brand, color and price)
+    if ((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) && 
+        (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])) &&  
+        (isset($_GET['filter_price'])) ){
+        $brand_color_price_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders) AND color_id IN ($color_placeholders) AND product_price <= ?");
     
-        $types = str_repeat('i', count($filtered_brand_array)+count($filtered_color_array));
-        $brand_color_stmt->bind_param($types, ...$filtered_brand_array,...$filtered_color_array);
+        $types = str_repeat('i', count($filtered_brand_array)+count($filtered_color_array)) . 'i';
+        $params = array_merge( $filtered_brand_array,$filtered_color_array,[$filtered_price]);
+        $brand_color_price_stmt->bind_param($types,...$params);
+        $brand_color_price_stmt->execute();
+        $results = $brand_color_price_stmt->get_result();
+
+// if filters have brand and color selected
+    }elseif ((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) && 
+    (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])) 
+     ){
+        $brand_color_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders) AND color_id IN ($color_placeholders) ");
+
+        $types = str_repeat('i', count($filtered_brand_array)+count($filtered_color_array)) ;
+        $params = array_merge( $filtered_brand_array,$filtered_color_array);
+        $brand_color_stmt->bind_param($types,...$params);
         $brand_color_stmt->execute();
         $results = $brand_color_stmt->get_result();
 
-    }elseif (isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) {
+    }
+    // if filter has brand and price selected
+    elseif ((isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) && 
+        (isset($_GET['filter_price'])) ){
+        $brand_price_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders)  AND product_price <= ?");
+    
+        $types = str_repeat('i', count($filtered_brand_array)) . 'i';
+        $params = array_merge( $filtered_brand_array,[$filtered_price]);
+        $brand_price_stmt->bind_param($types,...$params);
+        $brand_price_stmt->execute();
+        $results = $brand_price_stmt->get_result();
+
+    }
+    // if filter has color and price selected
+    elseif (
+        (isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])) &&  
+        (isset($_GET['filter_price'])) ){
+        $color_price_stmt = $conn->prepare("SELECT * FROM products WHERE   color_id IN ($color_placeholders) AND product_price <= ?");
+    
+        $types = str_repeat('i', count($filtered_color_array)) . 'i';
+        $params = array_merge($filtered_color_array,[$filtered_price]);
+        $color_price_stmt->bind_param($types,...$params);
+        $color_price_stmt->execute();
+        $results = $color_price_stmt->get_result();
+
+    }
+    // if filter has brand e selected
+    elseif (isset($_GET['brand']) && is_array($_GET['brand']) && !empty($_GET['brand'])) {
         $brand_stmt = $conn->prepare("SELECT * FROM products WHERE brand_id IN ($brand_placeholders)");
     
         $types = str_repeat('i', count($filtered_brand_array));
@@ -57,7 +103,9 @@
         $brand_stmt->execute();
         $results = $brand_stmt->get_result();
 
-    }elseif(isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])) {
+    }
+    // if filter has color selected
+    elseif(isset($_GET['color']) && is_array($_GET['color']) && !empty($_GET['color'])) {
         $color_stmt = $conn->prepare("SELECT * FROM products WHERE color_id IN ($color_placeholders)");
     
         $types = str_repeat('i', count($filtered_color_array));
@@ -66,35 +114,19 @@
         $results = $color_stmt->get_result();
 
     }
+    // if filter has  price selected
+    elseif(isset($_GET['filter_price'])  && !empty($_GET['filter_price'])) {
+        $filter_price_stmt = $conn->prepare("SELECT * FROM products WHERE product_price <=?");
+        $filter_price_stmt->bind_param('i',$filtered_price);
+        $filter_price_stmt->execute();
+        $results = $filter_price_stmt->get_result();
 
-    
-   
+    }
 }
-  else{
+else{
     $results  =$conn->query("SELECT * from `products`");
     
  }
-
-
-    // Retrieve filter values from the query parameters
-    $selectedColors = isset($_GET['colors']) ? explode(',', $_GET['colors']) : [];
-    $selectedBrands = isset($_GET['brands']) ? explode(',', $_GET['brands']) : [];
-    $selectedPrices = isset($_GET['prices']) ? explode(',', $_GET['prices']) : [];
-    $selectedStars = isset($_GET['stars']) ? explode(',', $_GET['stars']) : [];
-
-    // Build your SQL query based on the selected filters
-    // Execute the query and fetch results
-
-    // Example SQL query (you need to adjust this based on your database structure)
-    $result =$conn->query( "SELECT * FROM products WHERE 
-            -- color IN ('" . implode("','", $selectedColors) . "') AND 
-            brand_id IN ('" . implode("','", $selectedBrands) . "')
-        
-            ");
-
-     // price IN ('" . implode("','", $selectedPrices) . "') AND 
-            // star IN ('" . implode("','", $selectedStars) . "')    
-    
 
  $products = $results;
  ?>
