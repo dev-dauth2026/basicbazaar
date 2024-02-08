@@ -140,6 +140,32 @@
 
     <!-- Your Custom Scripts (if any) -->
     <script src="js/script.js"></script>
+
+   <script>
+    const rangeInput = document.getElementById('rangeInput');
+    const rangeValueDisplay = document.getElementById('priceRangeValue');
+
+    rangeValueDisplay.style.display= 'none'
+
+    // Function to update the position and value display
+    function updateDisplay() {
+      // Get the position of the thumb relative to the range input element
+      const thumbPosition = (rangeInput.value / rangeInput.max) * rangeInput.offsetWidth;
+
+      // Set the left position of the display element to align with the thumb position
+      rangeValueDisplay.style.left = thumbPosition + 'px';
+
+      // Set the text content of the display element to the current value of the range input
+      rangeValueDisplay.textContent ='$'+ rangeInput.value;
+
+      // Show the display element
+      rangeValueDisplay.style.display = 'block';
+    }
+
+    // Add event listeners for input and mousemove events to update the display
+    rangeInput.addEventListener('input', updateDisplay);
+    rangeInput.addEventListener('mousemove', updateDisplay);
+  </script>
     
 </body>
 </html>

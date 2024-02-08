@@ -13,7 +13,7 @@
                     </div>
                     
                     <hr class="custom-hr m-0  mb-2">
-                    <?php if(isset($_GET['color'] )|| (isset($_GET['brand']))) { ?>
+                    <?php if(isset($_GET['color'] )|| (isset($_GET['brand'])) || (isset($_GET['filter_price']))) { ?>
                     <div class="d-flex flex-column gap-1">
                         <?php if(isset($_GET['color'])){ ?>
                             <p>Color :</p>
@@ -45,6 +45,15 @@
                                  <?php }?>
                                 </span>
                             <?php } ?>
+
+                        <?php } ?>
+                        <?php if(isset($_GET['filter_price'])){ ?>
+                            <p>Price :</p>
+                       
+                                <span class="bg-success-subtle text-success px-3 py-1 rounded ">
+                                 <?php echo $_GET['filter_price'] ?>
+                                </span>
+                      
 
                         <?php } ?>
                     </div>
@@ -115,10 +124,10 @@
                 </div>
 
                 <!-- price filter  -->
-                <!-- <div class=" d-flex flex-column">
+            <div class=" d-flex flex-column">
                     <h6>Price</h6>
-                    <hr class="custom-hr ">
-                    <div class="d-flex flex-column">
+                    <hr class="custom-hr mb-0">
+                    <!-- <div class="d-flex flex-column">
                         <div class="d-flex gap-3">
                             <input type="checkbox" name="pricerange1">
                             <label for="pricerange1">Up to $25</label>
@@ -141,8 +150,31 @@
                         </div>
                         
 
+                    </div> -->
+                    <div class="d-flex flex-column">
+                        <div class="position-relative py-3 ">
+            
+                                <span id="priceRangeValue" class="position-absolute  translate-middle badge rounded-pill text-dark  bg-light "> 
+                                    <?php if(isset($_GET['filter_price'])) { ?>
+                                    $<?php echo $_GET['filter_price'] ; ?>
+                                
+                                        <?php }else{ ?>
+                                            $100
+                                        <?php } ?>
+                                </span>
+                                <input id="rangeInput" name="filter_price"  class="w-100 m-2" type="range" min="0" max="1000" 
+                                <?php if(isset($_GET['filter_price'])) { ?>
+                                       value ="<?php echo $_GET['filter_price'] ; ?>"
+                                    
+                                    <?php }else{ ?>
+                                    value ="<?php echo  100; ?>"
+                                <?php } ?>
+                                >
+                        </div>                 
+                        
                     </div>
-                </div> -->
+
+                </div> 
 
                 <!-- customer review filter  -->
                 <!-- <div class=" d-flex flex-column">
@@ -264,5 +296,6 @@
             </div>
         </div>
  </div>
+
   <!-- <button class='btn btn-primary btn-add-to-cart'>Add to Cart</button>
 <a href='#' class='btn btn-outline-secondary btn-details'>Details</a> -->
