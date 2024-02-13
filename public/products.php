@@ -209,22 +209,59 @@ else{
     rangeInput.addEventListener('input', updateDisplay);
     rangeInput.addEventListener('mousemove', updateDisplay);
 
-    function UnSetParam(paramName) {
+    function UnSetParamPrice(paramName) {
         // Remove the parameter from the URL
-        var currentUrl = decodeURIComponent(window.location.href);
-        console.log(decodeURIComponent(window.location.href))
+        let currentUrl = decodeURIComponent(window.location.href);
 
-        var url = new URL(currentUrl);
+        let url = new URL(currentUrl);
         url.searchParams.delete(paramName);
 
         // Redirect to the modified URL
         window.location.href = url.toString();
-        
-        // // Update the DOM element to reflect the parameter removal
-      
-
-      
     }
+
+    function UnSetParam(paramName, value) {
+    // Convert the value to a string
+    let paramToRemove = String(value);
+
+    // Retrieve the current URL and decode it
+    let currentUrl = decodeURIComponent(window.location.href);
+
+    // Create a URL object from the decoded URL
+    let url = new URL(currentUrl);
+
+    // Get the search parameters from the URL
+    let urlParams = url.searchParams;
+
+    // Get the parameter values for the specified parameter name
+    let brandParams = urlParams.getAll(paramName);
+    console.log('Params:', brandParams);
+
+    // Filter out the value to remove
+    let updatedBrandParam = brandParams.filter(function(param) {
+        return param !== paramToRemove;
+    });
+
+    // Delete the original parameter
+    urlParams.delete(paramName);
+
+
+    // Append the updated parameter values
+    updatedBrandParam.forEach(function(brandValue) {
+        urlParams.append(paramName, brandValue);
+    });
+
+    // Log the URL parameters after updating
+    console.log('After updating:', urlParams.toString());
+
+    // Construct the modified URL
+    let modifiedUrl = url.toString();
+
+
+    // Redirect to the modified URL
+    window.location.href = modifiedUrl;
+}
+
 
   </script>
     

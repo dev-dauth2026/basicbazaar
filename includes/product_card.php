@@ -20,15 +20,15 @@
                     <div class="d-flex flex-column gap-1">
                         <?php if(isset($_GET['color'])){ ?>
                             <p>Color :</p>
-                            <?php foreach($_GET['color'] as $filtered_color){ ?>
+                            <?php foreach($_GET['color'] as $key=> $filtered_color_value){ ?>
                                 <div class="d-flex justify-content-between align-items-center bg-success-subtle text-success px-3 py-1 rounded ">
                                 <?php if($color_array->num_rows>0){ ?>
                                      <?php foreach ($color_array as $color){?>
-                                        <?php if($filtered_color == $color['color_id']){ ?>
+                                        <?php if($filtered_color_value == $color['color_id']){ ?>
                                                     <span>
                                                      <?php echo $color['color_name'] ?>
                                                     </span>
-                                                    <i class="fas fa-times"></i>
+                                                    <button type="button" class="pe-auto text-success border-0 bg-transparent" onclick="UnSetParam('color[]',<?php echo $filtered_color_value; ?>)"><i class="fas fa-times"></i></button>
                                                      
                                             <?php } ?>
                                     <?php }?>
@@ -41,15 +41,15 @@
                        
                         <?php if(isset($_GET['brand'])){ ?>
                             <p>Brand :</p>
-                            <?php foreach($_GET['brand'] as $filtered_brand){ ?>
+                            <?php foreach($_GET['brand'] as $brand_key =>$filtered_brand_value){ ?>
                                 <div class="d-flex justify-content-between align-items-center bg-success-subtle text-success px-3 py-1 rounded ">
                                 <?php if($brand_array->num_rows>0){ ?>
                                      <?php foreach ($brand_array as $brand){?>
-                                        <?php if($filtered_brand == $brand['brand_id']){ ?>
+                                        <?php if($filtered_brand_value == $brand['brand_id']){ ?>
                                                     <span>
                                                     <?php echo $brand['brand_name'] ?>
                                                     </span>
-                                                    <button class="pe-auto text-success border-0 bg-transparent" onclick="UnSetParam('brand')"><i class="fas fa-times"></i></button>
+                                                    <button type="button" class="pe-auto text-success border-0 bg-transparent" onclick="UnSetParam('brand[]',<?php echo $filtered_brand_value; ?>)"><i class="fas fa-times"></i></button>
                                                     
                                             <?php } ?>
                                     <?php }?>
@@ -66,11 +66,7 @@
                                     upto $<?php echo $_GET['filter_price'] ?>
                                     </span>
                                     <button type="button" class="pe-auto text-success border-0 bg-transparent" onclick="UnSetParamPrice('filter_price')"><i class="fas fa-times"></i></button>
-                                   
-                                
                                 </div>
-                      
-
                         <?php } ?>
                     </div>
                     <?php } ?>
