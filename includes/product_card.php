@@ -7,6 +7,7 @@
                 
                 <input type="submit" value="Filter" class="btn btn-warning float-end">
                 <!-- selected filter  -->
+                <?php if(isset($_GET['color'] )|| (isset($_GET['brand'])) || (isset($_GET['filter_price']))) { ?>
                 <div class="border p-2 rounded">
                     <h2 id="query"></h2>
                     <div class="d-flex justify-content-between">
@@ -16,7 +17,7 @@
                     </div>
                     
                     <hr class="custom-hr m-0  mb-2">
-                    <?php if(isset($_GET['color'] )|| (isset($_GET['brand'])) || (isset($_GET['filter_price']))) { ?>
+                   
                     <div class="d-flex flex-column gap-1">
                         <?php if(isset($_GET['color'])){ ?>
                             <p>Color :</p>
@@ -69,8 +70,8 @@
                                 </div>
                         <?php } ?>
                     </div>
-                    <?php } ?>
                 </div>
+                <?php } ?>
 
 
                 <!-- color filter  -->
