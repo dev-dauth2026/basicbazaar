@@ -147,15 +147,15 @@
                                     $<?php echo $_GET['filter_price'] ; ?>
                                 
                                         <?php }else{ ?>
-                                            $100
+                                            <?php echo  $maximum_price; ?>
                                         <?php } ?>
                                 </span>
-                                <input id="rangeInput" name="filter_price"  class="w-100 m-2" type="range" min="0" max="1000" 
+                                <input id="rangeInput" name="filter_price"  class="w-100 m-2" type="range" min="0" max="<?php echo  $maximum_price; ?>" 
                                 <?php if(isset($_GET['filter_price'])) { ?>
                                        value ="<?php echo $_GET['filter_price'] ; ?>"
                                     
                                     <?php }else{ ?>
-                                    value ="<?php echo  100; ?>"
+                                    value ="<?php echo  $maximum_price; ?>"
                                 <?php } ?>
                                 >
                         </div>                 

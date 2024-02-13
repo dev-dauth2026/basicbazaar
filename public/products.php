@@ -139,8 +139,15 @@ else{
     $results  =$conn->query("SELECT * from `products`");
     
  }
+ 
 
  $products = $results;
+
+$maximum_price_stmt =$conn->query ("SELECT MAX(product_price) AS max_price FROM products");
+
+while ($maximum_price_product = $maximum_price_stmt->fetch_assoc()){
+    $maximum_price = $maximum_price_product['max_price'];
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
