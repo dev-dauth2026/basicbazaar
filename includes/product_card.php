@@ -100,6 +100,38 @@
                     </div>
                 </div>
 
+                 <!-- customer review filter  -->
+                <div class=" d-flex flex-column">
+                    <h6>Size</h6>
+                    <hr class="custom-hr mt-0">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="xs">
+                            <label for="xs">XS </label>   
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="sm">
+                            <label for="sm">SM </label>   
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="md">
+                            <label for="md">M </label>   
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="l">
+                            <label for="l">L </label>   
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="xl">
+                            <label for="xl">XL </label>   
+                        </div>
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="xxl">
+                            <label for="xxl">XXL </label>   
+                        </div>
+                    </div>
+                </div>
+
                 <!-- brand filter  -->
                 <div class=" d-flex flex-column">
                     <h6>Brands</h6>
